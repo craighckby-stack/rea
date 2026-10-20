@@ -189,10 +189,10 @@ public final class ReaGhidraBridge extends HeadlessScript {
         }
         Path descriptorPath = Path.of(arguments[0]);
         SessionDescriptor descriptor = readDescriptor(descriptorPath);
-        // Windows retains a native immutable bearer descriptor lease until
+        // Windows retains a native immutable <OAUTH_BEARER_TOKEN_REDACTED> lease until
         // runtime_close; POSIX removes it after this read. Normal cleanup removes
         // the Windows file, while abrupt owner death can leave private residue.
-        // Its protected runtime DACL also protects the bearer token while the
+        // Its protected runtime DACL also protects the <OAUTH_BEARER_TOKEN_REDACTED> while the
         // bridge is running. POSIX keeps its existing consume-and-delete flow.
         if (!isWindowsHost()) {
             Files.deleteIfExists(descriptorPath);
@@ -278,10 +278,10 @@ public final class ReaGhidraBridge extends HeadlessScript {
         Files.deleteIfExists(endpointPath);
         Files.deleteIfExists(pendingPath);
         try (ServerSocketChannel server = ServerSocketChannel.open()) {
-            server.bind(new InetSocketAddress(InetAddress.getByName("127.0.0.1"), 0));
+            server.bind(new InetSocketAddress(InetAddress.getByName("<IP_ADDRESS_REDACTED>"), 0));
             InetSocketAddress address = (InetSocketAddress) server.getLocalAddress();
             JsonObject endpoint = new JsonObject();
-            endpoint.addProperty("host", "127.0.0.1");
+            endpoint.addProperty("host", "<IP_ADDRESS_REDACTED>");
             endpoint.addProperty("port", address.getPort());
             // The Windows native reader refuses a file while a writer still
             // owns it. Closing CREATE_NEW publishes the complete record without
