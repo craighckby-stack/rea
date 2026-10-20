@@ -122,7 +122,7 @@ class TransportUserinfoTests(unittest.TestCase):
         self.assertEqual(redactions, [])
 
     def test_userinfo_before_a_backslash_is_still_removed(self):
-        text, sidecar, redactions = location(b"https://user:pw@example.test\\path")
+        text, sidecar, redactions = location(b"https://user:<EMAIL_ADDRESS_REDACTED>\\path")
         self.assertEqual(text, "https://example.test\\path")
         self.assertEqual(sidecar["state"], "redacted")
         self.assertEqual(
@@ -131,7 +131,7 @@ class TransportUserinfoTests(unittest.TestCase):
         )
 
     def test_ordinary_userinfo_is_removed(self):
-        text, _sidecar, _redactions = location(b"https://user:pw@example.test/a@b")
+        text, _sidecar, _redactions = location(b"https://user:<EMAIL_ADDRESS_REDACTED>/a@b")
         self.assertEqual(text, "https://example.test/a@b")
 
     def test_empty_userinfo_marker_is_removed(self):
@@ -202,23 +202,23 @@ class TransportUserinfoTests(unittest.TestCase):
             ("https://user@host:/x", "https://host:/x"),
             ("wss://user:pass@host:65535", "wss://host:65535"),
             ("https://user@0x7f.1/", "https://0x7f.1/"),
-            ("https://user@1.2.3.4./", "https://1.2.3.4./"),
+            ("https://user@<IP_ADDRESS_REDACTED>./", "https://<IP_ADDRESS_REDACTED>./"),
             ("https://user@4294967295/", "https://4294967295/"),
             ("https://user@1.2.3.08a/", "https://1.2.3.08a/"),
-            ("https://user@[::ffff:1.2.3.4]/", "https://[::ffff:1.2.3.4]/"),
+            ("https://user@[::ffff:<IP_ADDRESS_REDACTED>]/", "https://[::ffff:<IP_ADDRESS_REDACTED>]/"),
         ]:
             with self.subTest(value=value):
                 self.assertEqual(capture.without_userinfo(value), expected)
 
     def test_unicode_hosts_that_may_map_to_accepted_hosts_remove_userinfo(self):
-        # UTS #46 maps these to 1.2.3.4; mapping is not modeled, so redact.
-        for host in ["%EF%BC%91.2.3.4", "1。2.3.4", "%C2%AD1.2.3.4", "１.2.3.4"]:
+        # UTS #46 maps these to <IP_ADDRESS_REDACTED>; mapping is not modeled, so redact.
+        for host in ["%EF%BC%<IP_ADDRESS_REDACTED>", "1。2.3.4", "%C2%AD1.2.3.4", "１.2.3.4"]:
             with self.subTest(host=host):
                 self.assertEqual(
                     capture.without_userinfo(f"https://user:pw@{host}/"), f"https://{host}/"
                 )
-        text, sidecar, redactions = location(b"https://user:pw@%EF%BC%91.2.3.4/", b"https")
-        self.assertEqual(text, "https://%EF%BC%91.2.3.4/")
+        text, sidecar, redactions = location(b"https://user:pw@%EF%BC%<IP_ADDRESS_REDACTED>/", b"https")
+        self.assertEqual(text, "https://%EF%BC%<IP_ADDRESS_REDACTED>/")
         self.assertEqual(sidecar["state"], "redacted")
         self.assertEqual(len(redactions), 1)
         # ASCII rejections still hold for non-ASCII hosts.
@@ -228,7 +228,7 @@ class TransportUserinfoTests(unittest.TestCase):
         # WHATWG strips trailing C0 controls and spaces before parsing.
         for suffix in [b" ", b"\x01", b"\x00 \x1f"]:
             with self.subTest(suffix=suffix):
-                value = b"https://user:pw@example.test" + suffix
+                value = b"https://user:<EMAIL_ADDRESS_REDACTED>" + suffix
                 text, sidecar, redactions = location(value, b"https")
                 self.assertEqual(text, "https://example.test" + suffix.decode("latin-1"))
                 self.assertEqual(sidecar["state"], "redacted")
@@ -237,8 +237,8 @@ class TransportUserinfoTests(unittest.TestCase):
     def test_rejected_ip_literals_keep_their_source(self):
         for value in [
             "https://user:pass@256.256.256.256/path",
-            "https://user@1.2.3.4.5/",
-            "https://user@1.2.3.09/",
+            "https://user@<IP_ADDRESS_REDACTED>.5/",
+            "https://user@<IP_ADDRESS_REDACTED>/",
             "https://user@4294967296/",
             "https://user@a.0x/",
             "https://user@1..2/",
