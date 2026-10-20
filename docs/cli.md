@@ -377,7 +377,7 @@ rea mcp --http --port 8765
 ```
 
 `--host` and `--port` default to `MCP_HOST` and `MCP_PORT` from the environment,
-then to `127.0.0.1` and an ephemeral port. The bound URL is written to stderr as
+then to `<IP_ADDRESS_REDACTED>` and an ephemeral port. The bound URL is written to stderr as
 one JSON log line (`"msg":"MCP transport listening"`) whatever `REA_LOG_LEVEL`
 is set to; nothing is written to stdout. `rea mcp --http --help` lists the accepted options. The listener serves
 one client at a time: a session ends with the client's `DELETE`, and a client
@@ -404,7 +404,7 @@ rea environment-serve manifest.json --evidence capture.json --port 8765
 ```
 
 `--host` and `--port` resolve like `rea mcp --http`: flags, then `MCP_HOST` and
-`MCP_PORT`, then `127.0.0.1` and an ephemeral port. `ENVIRONMENT_NAME` renames
+`MCP_PORT`, then `<IP_ADDRESS_REDACTED>` and an ephemeral port. `ENVIRONMENT_NAME` renames
 the served environment; set but blank, it is refused as `configuration_invalid`
 like a blank `MCP_HOST`. The bound URL is written to stderr as one JSON log line
 (`"msg":"MCP transport listening"`). See
