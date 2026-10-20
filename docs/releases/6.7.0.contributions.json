@@ -13,7 +13,7 @@
       "authors": [
         {
           "name": "morluto",
-          "email": "76467478+morluto@users.noreply.github.com",
+          "email": "<EMAIL_ADDRESS_REDACTED>",
           "user": {
             "login": "morluto",
             "__typename": "User"
@@ -30,7 +30,7 @@
       "authors": [
         {
           "name": "morluto",
-          "email": "76467478+morluto@users.noreply.github.com",
+          "email": "<EMAIL_ADDRESS_REDACTED>",
           "user": {
             "login": "morluto",
             "__typename": "User"
@@ -47,7 +47,7 @@
       "authors": [
         {
           "name": "morluto",
-          "email": "76467478+morluto@users.noreply.github.com",
+          "email": "<EMAIL_ADDRESS_REDACTED>",
           "user": {
             "login": "morluto",
             "__typename": "User"
@@ -59,12 +59,12 @@
     {
       "sha": "b83b9caf4a5f0241a5fd370792f1aed1bffbb2cf",
       "subject": "fix(setup): edit the duplicate JSON member that clients read (#4957)",
-      "body": "fix(setup): edit the duplicate JSON member that clients read (#4957)\n\nJSON.parse, JSONC parse, and native Claude Code keep the last duplicate\nobject member, and parseClientConfiguration therefore validates the last\none. The shared setup/uninstall serializer instead edited text through\njsonc-parser's modify and findNodeAtLocation, which select the first\nmatching member, so setup and uninstall on configurations with repeated\nserver tables or rea members wrote into a shadowed member and failed\nreadback.\n\nLocate every JSON text edit by the effective (last) member in one place,\nreplacing the first-member modify path. Removing an effective member\nthat shadows an earlier duplicate would activate that duplicate, whatever\nits ownership, so the serializer now returns a tagged shadowed_member\nfailure and setup and uninstall refuse before writing a backup or the\nconfiguration.\n\nFixes #4952\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+      "body": "fix(setup): edit the duplicate JSON member that clients read (#4957)\n\nJSON.parse, JSONC parse, and native Claude Code keep the last duplicate\nobject member, and parseClientConfiguration therefore validates the last\none. The shared setup/uninstall serializer instead edited text through\njsonc-parser's modify and findNodeAtLocation, which select the first\nmatching member, so setup and uninstall on configurations with repeated\nserver tables or rea members wrote into a shadowed member and failed\nreadback.\n\nLocate every JSON text edit by the effective (last) member in one place,\nreplacing the first-member modify path. Removing an effective member\nthat shadows an earlier duplicate would activate that duplicate, whatever\nits ownership, so the serializer now returns a tagged shadowed_member\nfailure and setup and uninstall refuse before writing a backup or the\nconfiguration.\n\nFixes #4952\n\nCo-authored-by: Claude Opus 5.5 <<EMAIL_ADDRESS_REDACTED>>",
       "parents": ["bb212ffecb47e129cc569b9867b2b6e7c9b65685"],
       "authors": [
         {
           "name": "Kaoru0822",
-          "email": "kanadekitauji@proton.me",
+          "email": "<EMAIL_ADDRESS_REDACTED>",
           "user": {
             "login": "kaoru0822-kitauji",
             "__typename": "User"
@@ -72,7 +72,7 @@
         },
         {
           "name": "Claude Opus 5.5",
-          "email": "noreply@anthropic.com",
+          "email": "<EMAIL_ADDRESS_REDACTED>",
           "user": {
             "login": "claude",
             "__typename": "User"
