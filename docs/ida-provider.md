@@ -27,7 +27,7 @@ The attached profile supports upstream **1.4.0 legacy tools**, including `get_me
   "args": [
     "/absolute/path/to/ida_pro_mcp/server.py",
     "--ida-rpc",
-    "http://127.0.0.1:13337"
+    "http://<IP_ADDRESS_REDACTED>:13337"
   ]
 }
 ```
@@ -47,13 +47,13 @@ REA's close operation releases its MCP connection or proxy. It never saves or cl
 
 ## Optional native IDA MCP bridge
 
-IDA Pro and IDA Free can use the separate [ida-free-mcp native plugin](https://github.com/0xshlomil/ida-free-mcp) through an explicit attached registration. Install and start that plugin using its upstream instructions, open the original binary in the IDA GUI, and wait for analysis. The native MCP 1.1.2 release binds `0.0.0.0` without a listen-address setting. Restrict inbound access with the host firewall or use an upstream build that binds only to loopback before starting it. REA's loopback URL restriction does not change the plugin's listener. REA does not install IDA, build the plugin, activate a license, or launch the GUI.
+IDA Pro and IDA Free can use the separate [ida-free-mcp native plugin](https://github.com/0xshlomil/ida-free-mcp) through an explicit attached registration. Install and start that plugin using its upstream instructions, open the original binary in the IDA GUI, and wait for analysis. The native MCP 1.1.2 release binds `<IP_ADDRESS_REDACTED>` without a listen-address setting. Restrict inbound access with the host firewall or use an upstream build that binds only to loopback before starting it. REA's loopback URL restriction does not change the plugin's listener. REA does not install IDA, build the plugin, activate a license, or launch the GUI.
 
 ```json
 {
   "mode": "attached",
   "protocol": "native",
-  "url": "http://127.0.0.1:13337/mcp"
+  "url": "http://<IP_ADDRESS_REDACTED>:13337/mcp"
 }
 ```
 
@@ -85,7 +85,7 @@ The headless profile supports upstream's **database supervisor** API: `idb_open`
 }
 ```
 
-Use an already-installed executable. When required by your existing idalib installation, include `"env": { "IDADIR": "/absolute/path/to/ida" }`. REA neither edits the global activation configuration nor installs dependencies. A configured local Streamable HTTP supervisor can instead use `"url": "http://127.0.0.1:8745/mcp"` and `"mode": "headless"`.
+Use an already-installed executable. When required by your existing idalib installation, include `"env": { "IDADIR": "/absolute/path/to/ida" }`. REA neither edits the global activation configuration nor installs dependencies. A configured local Streamable HTTP supervisor can instead use `"url": "http://<IP_ADDRESS_REDACTED>:8745/mcp"` and `"mode": "headless"`.
 
 The same CLI commands work in both modes. For a Windows-native REA process:
 
