@@ -41,7 +41,7 @@ Record the image digest, REA source revision and these dependency versions:
 
 The verified guest used Python 3.14.7, cURL 8.22.0, ngtcp2 1.25.0 and nghttp3
 1.18.0. Other dependency profiles need verification. Back up the guest's
-`/etc/hosts` before adding `127.0.0.1 lab.test`. Reserve guest TCP/UDP loopback
+`/etc/hosts` before adding `<IP_ADDRESS_REDACTED> lab.test`. Reserve guest TCP/UDP loopback
 ports 18443 and 19443. These changes belong only to the disposable guest.
 
 From the guest REA checkout, use its pinned Node/npm toolchain:
