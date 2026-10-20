@@ -33,7 +33,7 @@ The corresponding MCP call is:
 ```
 
 `frame.number` is always included. Repeated values are ordered string arrays,
-for example `"ip.addr": ["192.0.2.1", "192.0.2.2"]`. Missing fields remain
+for example `"ip.addr": ["<IP_ADDRESS_REDACTED>", "<IP_ADDRESS_REDACTED>"]`. Missing fields remain
 absent; they are not converted to zero or empty arrays. Export-only index/score
 metadata is discarded. No payload bytes are automatically added; select a
 supported byte field such as `data.data` or `@data` when needed.
