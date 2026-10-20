@@ -73,7 +73,7 @@ later increment.
   `children_environments: null`. Read the `/agentenv` body within the SDK's
   4 MiB bound and answer `413` with JSON-RPC `-32000` beyond it.
 - Resolve host and port as `rea mcp --http` does (flags, `MCP_HOST`/`MCP_PORT`,
-  then `127.0.0.1` and port `0`), announce the bound URL as one pino JSON line
+  then `<IP_ADDRESS_REDACTED>` and port `0`), announce the bound URL as one pino JSON line
   on stderr, serve through the shared streamable HTTP listener, and run until
   SIGINT or SIGTERM only, then close, print one `stopped` document and exit
   `130` or `143` through the shared command cancellation handler; a signal
