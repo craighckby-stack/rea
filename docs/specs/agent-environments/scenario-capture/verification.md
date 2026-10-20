@@ -32,7 +32,7 @@ a form that POSTs JSON to `/api/albums`. The scenario waited for the list, opene
 
 - Capture: 14 transactions, 70 events, 0 dropped, authority `controlled-replay`.
 - `environment-manifest`: `parent_operation` `capture_browser_scenario`, origin
-  `http://127.0.0.1:3199`, confidence `inferred`. Tools `get_photos` (records 1, 9),
+  `http://<IP_ADDRESS_REDACTED>:3199`, confidence `inferred`. Tools `get_photos` (records 1, 9),
   `get_photos_by_id` (`{numeric}` id, records 5, 6, 7) and `post_albums` (record 13, body shape
   `title: string`). The page and the three PNGs were excluded as `ui-page-or-asset`.
 - `environment-serve`: `get_photos_by_id {id: "3"}` returned the recorded JSON with
