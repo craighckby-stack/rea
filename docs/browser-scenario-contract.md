@@ -38,7 +38,7 @@ already-installed Chrome-family browser and the URL with your running fixture:
     "mode": "launch",
     "executable_path": "/absolute/path/to/chromium"
   },
-  "start_url": { "url": "http://127.0.0.1:3000" },
+  "start_url": { "url": "http://<IP_ADDRESS_REDACTED>:3000" },
   "actions": [
     { "step_id": "settle", "action": "wait_for_timeout", "duration_ms": 100 }
   ]
@@ -76,7 +76,7 @@ to your page; an already-visible container or previous results are insufficient.
     "mode": "launch",
     "executable_path": "/absolute/path/to/chromium"
   },
-  "start_url": { "url": "http://127.0.0.1:3000" },
+  "start_url": { "url": "http://<IP_ADDRESS_REDACTED>:3000" },
   "actions": [
     {
       "step_id": "search",
@@ -290,7 +290,7 @@ and unfinished-request metadata. Select content independently:
     "mode": "launch",
     "executable_path": "/absolute/path/to/chromium"
   },
-  "start_url": { "url": "http://127.0.0.1:3000" },
+  "start_url": { "url": "http://<IP_ADDRESS_REDACTED>:3000" },
   "actions": [
     {
       "step_id": "run",
