@@ -202,7 +202,7 @@ child output. Child output remains in the capture Evidence on stdout.
     {
       "type": "input",
       "at_ms": 250,
-      "data": "user@example.test\r",
+      "data": "<EMAIL_ADDRESS_REDACTED>\r",
       "sensitive": true
     },
     { "type": "resize", "at_ms": 500, "columns": 100, "rows": 30 },
