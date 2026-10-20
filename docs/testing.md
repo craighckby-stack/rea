@@ -759,7 +759,7 @@ class search, class inventory, method decompilation and incoming references.
 See [Android analysis](android-analysis.md) for boundaries and resource budgets.
 
 `verify:jeb` requires a caller-started JEB client serving MCP at
-`REA_JEB_MCP_URL` (default `http://127.0.0.1:8425/mcp`) with a project
+`REA_JEB_MCP_URL` (default `http://<IP_ADDRESS_REDACTED>:8425/mcp`) with a project
 already open, and exercises shared application/provider client inspection, unit listing coverage,
 and method decompilation. The script records the engine's exact response to
 `open_jeb_project`; the earlier licensed 5.48.0 headless verification did not
