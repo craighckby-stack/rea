@@ -15,7 +15,7 @@ client registration keep stdio.
 - Route `mcp --http ...` and `--mcp --http ...` to the MCP runtime in the
   dispatcher without changing bare `mcp`, `mcp doctor` or `mcp add`.
 - Resolve host and port from the flags, then `MCP_HOST`/`MCP_PORT` from the
-  environment snapshot, then `127.0.0.1` and port `0`; announce the bound URL as
+  environment snapshot, then `<IP_ADDRESS_REDACTED>` and port `0`; announce the bound URL as
   one pino JSON line on stderr at every log level and leave stdout unused.
 - Use `WebStandardStreamableHTTPServerTransport` in stateful mode around one
   server instance built once, after the listener has bound. `DELETE` ends the session on its transport without
@@ -29,7 +29,7 @@ client registration keep stdio.
 - Bridge node:http to web Request/Response in `src/server/http/`, streaming
   response chunks as they are produced and turning a client disconnect into a
   request abort and body cancellation.
-- Classify a loopback bind by the actual bound IP (`127.0.0.0/8`, `::1`, or
+- Classify a loopback bind by the actual bound IP (`<IP_ADDRESS_REDACTED>/8`, `::1`, or
   IPv4-mapped loopback), without using the configured DNS name as evidence; validate
   the `Host` and `Origin` headers with the SDK loopback allowlist plus the
   configured name and the bound address on such binds, and relax both for
