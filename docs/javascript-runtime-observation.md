@@ -12,9 +12,9 @@ target ID. This surface is separate from browser CDP, Electron file-page
 inspection, and Process Capture:
 
 ```bash
-rea list-javascript-runtime-targets http://127.0.0.1:9229 \
+rea list-javascript-runtime-targets http://<IP_ADDRESS_REDACTED>:9229 \
   --json
-rea observe-javascript-runtime http://127.0.0.1:9229 TARGET_ID \
+rea observe-javascript-runtime http://<IP_ADDRESS_REDACTED>:9229 TARGET_ID \
   --runtime-kind node --json
 ```
 
@@ -23,7 +23,7 @@ rea observe-javascript-runtime http://127.0.0.1:9229 TARGET_ID \
 Run your selected application with Inspector bound to loopback:
 
 ```bash
-node --inspect=127.0.0.1:9229 ./app.mjs
+node --inspect=<IP_ADDRESS_REDACTED>:9229 ./app.mjs
 ```
 
 Keep it running while listing targets and observing the selected ID. Use a free
