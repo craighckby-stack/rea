@@ -37,7 +37,7 @@ previous increment.
   device name Windows reserves (`con`, `prn`, `aux`, `nul`, `com1`–`com9`,
   `lpt1`–`lpt9`), since the env folder could not be created there.
 - The Dockerfile reads `FROM node:24.18.0-bookworm-slim`, sets
-  `MCP_HOST=0.0.0.0` and `MCP_PORT=18765`, installs Debian's `python3` for the
+  `MCP_HOST=<IP_ADDRESS_REDACTED>` and `MCP_PORT=18765`, installs Debian's `python3` for the
   framework's readiness probe, installs
   `rea-agents@<PRODUCT_IDENTITY.packageVersion>` from the registry or, with
   `--package-tarball`, copies the tarball as `rea-agents.tgz`, installs it
