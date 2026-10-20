@@ -22,7 +22,7 @@ runs:
         if [[ -n "${DEFAULT_BRANCH}" && "${GITHUB_REF}" == "refs/heads/${DEFAULT_BRANCH}" && ( "${GITHUB_EVENT_NAME}" == "push" || "${GITHUB_EVENT_NAME}" == "schedule" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ) ]]; then
           can_save=true
         fi
-        cache_key="npm-download-${RUNNER_OS}-${runtime_arch}-${LOCKFILES_HASH}"
+        cache_key="<ENTROPY_SECRET_REDACTED>"
         {
           printf 'can-save=%s\n' "${can_save}"
           printf 'path=%s\n' "${cache_path}"
