@@ -167,7 +167,7 @@ here.
 wrote manifest Evidence `ev_6553a8e5…` naming that parent, `grafana-example`,
 19 tools. `environment-serve manifest.json --evidence capture.json --port 0
 --json < /dev/null` announced one stderr line
-`{"transport":"streamable-http","url":"http://127.0.0.1:62305/mcp","msg":"MCP transport listening"}`
+`{"transport":"streamable-http","url":"http://<IP_ADDRESS_REDACTED>:62305/mcp","msg":"MCP transport listening"}`
 and nothing on stdout until shutdown.
 
 `GET /.well-known/agent-env.json` returned a card whose top-level keys,
@@ -204,7 +204,7 @@ paths. A malformed body within the bound (`{`) was answered `400`
 `{"jsonrpc":"2.0","error":{"code":-32700,"message":"parse error"},"id":null}`.
 
 SIGTERM ended the process with status 143 after one stdout document
-`{"status":"stopped","url":"http://127.0.0.1:62305/mcp","environment":"grafana-example","tools":19,"evidence_id":"ev_4ee4759b…","manifest_evidence_id":"ev_6553a8e5…"}`.
+`{"status":"stopped","url":"http://<IP_ADDRESS_REDACTED>:62305/mcp","environment":"grafana-example","tools":19,"evidence_id":"ev_4ee4759b…","manifest_evidence_id":"ev_6553a8e5…"}`.
 A restart with `ENVIRONMENT_NAME=renamed` served a card named `renamed`,
 reported `"environment":"renamed"` in its stopped document and also exited 143. `ENVIRONMENT_NAME=` (set, blank) exited 1 before binding with
 `{"code":"configuration_invalid","details":{"settings":[{"setting":"ENVIRONMENT_NAME",…}]}}`.
@@ -236,7 +236,7 @@ tool's first record. Request bodies on write tools are accepted and ignored.
 The post-bind listener `error` path is wired and type-checked but not
 provoked by a test, since the shared listener does not expose its
 `node:http` server. Non-loopback binds and the relaxed `Host` check were not
-exercised; the Python exchange, curl checks and every test used `127.0.0.1`.
+exercised; the Python exchange, curl checks and every test used `<IP_ADDRESS_REDACTED>`.
 Replay selection and body parsing were measured on the 28-record fixture
 only; no large-capture timing was taken. Resident-set figures are `ps` samples
 of the serving process before and after one request each. Token usage and
