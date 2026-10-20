@@ -52,7 +52,7 @@ kept when the declared secret has at least 12 characters:
 ```json
 {
   "browser": { "mode": "launch", "executable_path": "/usr/bin/chromium" },
-  "start_url": { "url": "http://127.0.0.1:5230/auth", "query": [] },
+  "start_url": { "url": "http://<IP_ADDRESS_REDACTED>:5230/auth", "query": [] },
   "secrets": [
     { "secret_id": "admin_password", "environment_variable": "APP_PASSWORD" }
   ],
@@ -78,7 +78,7 @@ kept when the declared secret has at least 12 characters:
     {
       "step_id": "first-memo",
       "action": "goto",
-      "destination": { "url": "http://127.0.0.1:5230/m/1", "query": [] },
+      "destination": { "url": "http://<IP_ADDRESS_REDACTED>:5230/m/1", "query": [] },
       "wait_until": "load"
     }
   ],
@@ -228,11 +228,11 @@ and does not change replay.
 ## Serve a manifest
 
 ```sh
-rea environment-serve manifest.json --evidence capture.json [--host 127.0.0.1] [--port 0]
+rea environment-serve manifest.json --evidence capture.json [--host <IP_ADDRESS_REDACTED>] [--port 0]
 ```
 
 `--host` and `--port` default to `MCP_HOST` and `MCP_PORT` from the
-environment, then to `127.0.0.1` and an ephemeral port, exactly as
+environment, then to `<IP_ADDRESS_REDACTED>` and an ephemeral port, exactly as
 [`rea mcp --http`](cli.md#serve-mcp-over-streamable-http) resolves them. The
 bound MCP URL is written to stderr as one JSON log line
 (`"msg":"MCP transport listening"` with `url`); `REA_LOG_LEVEL` overrides that
@@ -371,7 +371,7 @@ parent directories must be trusted. On POSIX output files use mode `0600`;
 Windows inherits ACLs and REA does not establish owner-only access there. Choose
 an already private Windows destination when captured content needs it.
 
-The Dockerfile sets `MCP_HOST=0.0.0.0` and `MCP_PORT=18765`, the port the
+The Dockerfile sets `MCP_HOST=<IP_ADDRESS_REDACTED>` and `MCP_PORT=18765`, the port the
 framework maps for an MCP server env; the framework's own deploy supplies
 `MCP_HOST`, `MCP_PORT` and `ENVIRONMENT_NAME`, so the served card carries the
 env's name. It installs Debian's `python3` because the framework's local
