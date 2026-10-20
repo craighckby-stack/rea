@@ -560,7 +560,7 @@ stdio is the default transport and the only one that client registrations,
 [--port N]` is an opt-in alternative that serves the same catalog over the
 streamable HTTP transport at `/mcp`; it replaces stdio for that process rather
 than running beside it. Host and port come from the flags, then `MCP_HOST` and
-`MCP_PORT`, then `127.0.0.1` and an ephemeral port. The bound URL is announced
+`MCP_PORT`, then `<IP_ADDRESS_REDACTED>` and an ephemeral port. The bound URL is announced
 as one JSON log line on stderr (`"msg":"MCP transport listening"` with `url`)
 at every `REA_LOG_LEVEL`, because an ephemeral port is otherwise unreachable;
 stdout stays unused.
@@ -626,7 +626,7 @@ session; any other sessionless POST goes to the live transport, which refuses
 it without disturbing the session. Requests that carry no valid session id are
 refused with `400` or `404` as the SDK transport defines. A bind is loopback by
 address class, not spelling, and is classified from the address the listener
-actually bound: any `127.0.0.0/8` address, `::1`, or an IPv4-mapped loopback.
+actually bound: any `<IP_ADDRESS_REDACTED>/8` address, `::1`, or an IPv4-mapped loopback.
 Configured names, including `localhost` and its aliases, do not establish that
 the bound address is local; names are added only after classifying the actual IP.
 On such a bind, requests whose `Host` header is outside the SDK loopback allowlist plus
