@@ -966,7 +966,7 @@ rollback. Producer cancellation retains the caller's exact reason separately
 from LaunchSupport warnings and cleanup failures. Failed rollback keeps the
 original process owner for a later cleanup retry.
 The experimental Windows transport uses authenticated IPv4 loopback with a
-private native-owned bearer descriptor and Job Object process ownership.
+private native-owned <OAUTH_BEARER_TOKEN_REDACTED> and Job Object process ownership.
 
 Operations begin only after default auto-analysis completes. `open_binary`
 selects and validates the target/provider binding; it does not wait for Ghidra
