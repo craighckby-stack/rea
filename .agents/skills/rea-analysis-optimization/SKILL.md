@@ -1,3 +1,21 @@
+/**
+ * @file rea-analysis-optimization
+ * @description Optimization and benchmarking specification for Reverse Engineering Agent (REA) providers and workflows.
+ *
+ * 1. What the file does:
+ *    - Outlines engineering protocols for profiling, isolating, and rectifying computational and memory bottlenecks in binary analysis workflows.
+ *    - Dictates strict criteria for independent correctness oracles, projection pushdown, decode bounding, and token overhead measurement.
+ *    - Formulates rules for shared producer lifecycles, deterministic cache policies, and process-family resource governance.
+ *
+ * 2. Its role in the overall system:
+ *    - Serves as the core architectural optimization standard across REA analysis components.
+ *    - Enforces evidence preservation and correctness verification while reducing latency, peak heap utilization, and token overhead in agent interactions.
+ *
+ * 3. How it connects to other components:
+ *    - Directly guides the performance tuning of CLI and MCP (Model Context Protocol) tool providers communicating with native reverse-engineering engines.
+ *    - Interfaces with AGENTS.md performance baselines, tool-design specifications, and testing verification suites.
+ *    - Coordinates with analysis orchestrators and cache registries to avoid redundant analysis scans and premature abstractions.
+ */
 ---
 name: rea-analysis-optimization
 description: Optimize REA providers and shared analysis workflows for agent context, latency, CPU, and memory while preserving correctness and Evidence. Use for analysis bottlenecks and cache or query design; CI/test-suite optimization belongs to rea-ci-tests-audit.
