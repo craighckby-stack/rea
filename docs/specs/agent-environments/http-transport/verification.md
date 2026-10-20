@@ -48,7 +48,7 @@ run, `/usr/bin/time -l npx vitest run --project cli-boundary
 tests/boundary/cli/dispatcher.test.ts`, passed 3 tests in 1.08 s elapsed,
 0.89 s user, 0.26 s sys, 153026560 bytes, now including `mcp add --http`
 routed to the CLI beside `mcp --http --port 0`, `--mcp --http` and `mcp --host
-127.0.0.1 --http` routed to the HTTP entry and `mcp doctor --http`, `mcp add`
+<IP_ADDRESS_REDACTED> --http` routed to the HTTP entry and `mcp doctor --http`, `mcp add`
 and `--mcp extra` keeping their routes.
 
 The four full projects ran in sequence while a sibling worktree ran its own
@@ -92,7 +92,7 @@ empty stderr. Nothing in this pass was changed for these failures.
 Cross-implementation check with the Python `mcp` 1.30.0 client (httpx 0.28.1,
 Python 3.12.12) against the built `node scripts/rea.mjs mcp --http --port 0 <
 /dev/null`: stderr announced
-`{"transport":"streamable-http","url":"http://127.0.0.1:57093/mcp","msg":"MCP transport listening"}`.
+`{"transport":"streamable-http","url":"http://<IP_ADDRESS_REDACTED>:57093/mcp","msg":"MCP transport listening"}`.
 Session A: `initialize` POST returned `200 text/event-stream` with
 `mcp-session-id`; `notifications/initialized` returned `202` with no body; the
 standalone GET and the `tools/list` and `tools/call` POSTs returned `200
@@ -172,10 +172,10 @@ commit, with a regression test where the behaviour is observable:
   the instance's first `close()` rejects, the second call resolves and the port
   is released.
 - Loopback aliases skipped Host validation (both reviewers, P2 and P1): a bind
-  is now loopback by address class (`127.0.0.0/8`, `::1`, IPv4-mapped loopback,
+  is now loopback by address class (`<IP_ADDRESS_REDACTED>/8`, `::1`, IPv4-mapped loopback,
   `localhost` names) after the same normalization the SDK applies to the Host
   header, and the allowlist adds the bind's own hostname so requests to
-  `127.0.0.2` or `localhost.` are still served. Test: twelve spellings.
+  `<IP_ADDRESS_REDACTED>` or `localhost.` are still served. Test: twelve spellings.
 - A sessionless POST could close the live session before any header check
   (Greptile, P1): on loopback binds the route validates `Origin` with the same
   allowlist as `Host`, and only a POST carrying `Content-Type:
@@ -213,7 +213,7 @@ binding and a URL that cannot be formed from the bound address closes the
 listener (test: `fe80::1%lo0` rejects before the factory runs); loopback is
 classified from the bound address with the configured name added to the
 allowlist (test: `ip6-localhost` bound to `::1`, `dev.local` bound to
-`127.0.0.1`); and the MCP runtime passes `closeInstance: false` so the factory
+`<IP_ADDRESS_REDACTED>`); and the MCP runtime passes `closeInstance: false` so the factory
 owner in `startMcpTransport` remains the single owner of instance cleanup
 (test: `close` leaves the instance open until its owner closes it).
 
