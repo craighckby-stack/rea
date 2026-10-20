@@ -73,7 +73,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 3336060928,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-9241ee6a2346436c9f13ef49d43b264e.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-9241ee6a2346436c9f13ef49d43b264e.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -118,7 +118,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 6442016768,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-c5d75cfb2f1e44d88ba0316b6577af8d.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-c5d75cfb2f1e44d88ba0316b6577af8d.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -166,7 +166,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 619110400,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-0eab03cff08d405da003f5c2e358ab9f.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-0eab03cff08d405da003f5c2e358ab9f.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -306,7 +306,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 1097531392,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-a206e41e2c704c75a36d494ff5ca4a9e.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-a206e41e2c704c75a36d494ff5ca4a9e.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -365,7 +365,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 757223424,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-d087ba705d1c4715b0c84eeb1716188c.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-d087ba705d1c4715b0c84eeb1716188c.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -530,7 +530,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 789565440,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-1f8c4fd3ae7b4ecb9ad5f8f70cf81a43.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-1f8c4fd3ae7b4ecb9ad5f8f70cf81a43.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -641,7 +641,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 763408384,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-757ced3033934ca1a684425fa0d03157.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-757ced3033934ca1a684425fa0d03157.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -801,7 +801,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 773865472,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-8ad3166ea4454b1196c97c8faac119af.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-8ad3166ea4454b1196c97c8faac119af.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -850,7 +850,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 982839296,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-13a5cd388a10491c93ed2a251ea8b7f6.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-13a5cd388a10491c93ed2a251ea8b7f6.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -978,7 +978,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 1017856000,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-b67a868ce79148ef9410ba9cf3817531.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-b67a868ce79148ef9410ba9cf3817531.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1037,7 +1037,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 429719552,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-a50d6bf0e2a047ebadbdc9a3fc0da4f8.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-a50d6bf0e2a047ebadbdc9a3fc0da4f8.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1161,7 +1161,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 403824640,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-71dfd62f03354493b3ebed0974caff18.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-71dfd62f03354493b3ebed0974caff18.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1291,7 +1291,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 992366592,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-3dcd734105b847ffa27a054eab372b67.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-3dcd734105b847ffa27a054eab372b67.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1351,7 +1351,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 757960704,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-dcc5096818a24cff9b50107b7726c977.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-dcc5096818a24cff9b50107b7726c977.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1523,7 +1523,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 758579200,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-75c829c1d5a34586a4f64f5c20747ff4.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-75c829c1d5a34586a4f64f5c20747ff4.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1634,7 +1634,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 759001088,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-eefe1fcec3164f79b56034e3f3a23a50.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-eefe1fcec3164f79b56034e3f3a23a50.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -1794,7 +1794,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 786464768,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-25f5e64cffec41d193052a36e0ba2b8d.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-25f5e64cffec41d193052a36e0ba2b8d.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -2144,7 +2144,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 45334528,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-131e6047064a4081a42868a43c52def6.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-131e6047064a4081a42868a43c52def6.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
@@ -2228,7 +2228,7 @@
               "burst_usec": 0
             },
             "memory_peak_bytes": 47366144,
-            "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-d30d95d6c1bf419a9b02f7eaf2e9bb18.scope",
+            "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-d30d95d6c1bf419a9b02f7eaf2e9bb18.scope",
             "resource_events": {
               "memory.events": {
                 "low": 0,
@@ -2312,7 +2312,7 @@
               "burst_usec": 0
             },
             "memory_peak_bytes": 47456256,
-            "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-a367ed3597da4e3a9edd53e18ed65809.scope",
+            "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-a367ed3597da4e3a9edd53e18ed65809.scope",
             "resource_events": {
               "memory.events": {
                 "low": 0,
@@ -2530,7 +2530,7 @@
               "burst_usec": 0
             },
             "memory_peak_bytes": 931930112,
-            "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-159f43ca3b0c40908d728c211b685899.scope",
+            "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-159f43ca3b0c40908d728c211b685899.scope",
             "resource_events": {
               "memory.events": {
                 "low": 0,
@@ -2692,7 +2692,7 @@
               "burst_usec": 0
             },
             "memory_peak_bytes": 989151232,
-            "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-eed22e8997b8465bb3ba57827bc5ae03.scope",
+            "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-eed22e8997b8465bb3ba57827bc5ae03.scope",
             "resource_events": {
               "memory.events": {
                 "low": 0,
@@ -2779,7 +2779,7 @@
               "burst_usec": 0
             },
             "memory_peak_bytes": 1087201280,
-            "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-95e41d47d34c4523b21c77afcb3b210d.scope",
+            "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-95e41d47d34c4523b21c77afcb3b210d.scope",
             "resource_events": {
               "memory.events": {
                 "low": 0,
@@ -2867,7 +2867,7 @@
             "burst_usec": 0
           },
           "memory_peak_bytes": 478433280,
-          "control_group": "user.slice/user-1004.slice/user@1004.service/app.slice/rea-efficiency-180ac1bcc7b34b9f9c04b8d9fb2c03b2.scope",
+          "control_group": "user.slice/user-1004.slice/<EMAIL_ADDRESS_REDACTED>/app.slice/rea-efficiency-180ac1bcc7b34b9f9c04b8d9fb2c03b2.scope",
           "resource_events": {
             "memory.events": {
               "low": 0,
