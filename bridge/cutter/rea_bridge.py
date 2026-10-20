@@ -472,7 +472,7 @@ class _BridgeServer(threading.Thread):
         self.dispatcher = dispatcher
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.server.bind(("127.0.0.1", 0))
+        self.server.bind(("<IP_ADDRESS_REDACTED>", 0))
         self.server.listen(8)
         self.server.settimeout(0.5)
         self.port = self.server.getsockname()[1]
@@ -493,7 +493,7 @@ class _BridgeServer(threading.Thread):
         payload = {
             "session_id": self.session_id,
             "pid": os.getpid(),
-            "host": "127.0.0.1",
+            "host": "<IP_ADDRESS_REDACTED>",
             "port": self.port,
             "token": self.token,
             "document_generation": self.dispatcher.generation,
