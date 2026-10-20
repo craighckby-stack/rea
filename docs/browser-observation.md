@@ -97,7 +97,7 @@ Start a separate browser profile with an explicit debugging port. The exact exec
 google-chrome \
   --remote-debugging-port=9222 \
   --user-data-dir=/tmp/rea-browser-profile \
-  http://127.0.0.1:3000
+  http://<IP_ADDRESS_REDACTED>:3000
 ```
 
 REA does not launch, own, or terminate this browser. Use a dedicated profile and stop it yourself when the investigation is complete. Do not expose the debugging port on a non-loopback interface.
@@ -141,7 +141,7 @@ in an existing profile.
 For such a browser, pass the browser socket instead of the HTTP endpoint:
 
 ```bash
-rea list-browser-targets ws://127.0.0.1:9222/devtools/browser/<id>
+rea list-browser-targets ws://<IP_ADDRESS_REDACTED>:9222/devtools/browser/<id>
 ```
 
 Chrome writes the port and the `/devtools/browser/<id>` path to the
@@ -157,7 +157,7 @@ file for you.
   Discovery must finish within the same 10-second deadline as HTTP discovery.
   Chrome may ask you to approve each connection.
 - The browser identifier controls access to the socket. Evidence records the
-  endpoint as `ws://127.0.0.1:9222/devtools/browser/[REDACTED]`.
+  endpoint as `ws://<IP_ADDRESS_REDACTED>:9222/devtools/browser/[REDACTED]`.
 - `browser.revision` is the socket's `Browser.getVersion` value, such as
   `@e533e98…`. HTTP discovery reports `WebKit-Version`, such as
   `537.36 (@e533e98…)`.
@@ -180,9 +180,9 @@ decoded strings or JSON objects.
 Discovery supplies a literal loopback CDP endpoint and returns all eligible
 page targets unless an exact HTTP(S) origin filter narrows the result. Follow-up
 inspection requests select one target; their default scope is its current origin.
-The endpoint is either `http://127.0.0.1:PORT` or a
+The endpoint is either `http://<IP_ADDRESS_REDACTED>:PORT` or a
 [browser socket](#browsers-without-http-discovery),
-`ws://127.0.0.1:PORT/devtools/browser/ID`; `[::1]` may replace `127.0.0.1`.
+`ws://<IP_ADDRESS_REDACTED>:PORT/devtools/browser/ID`; `[::1]` may replace `<IP_ADDRESS_REDACTED>`.
 `localhost`, private-LAN addresses, HTTPS and `wss:` endpoints, credentials,
 queries, fragments, implicit ports, and any other path are not valid CDP
 endpoints. Origin filters contain only scheme,
@@ -195,8 +195,8 @@ Pass the endpoint and selected target for each call. An origin filter is
 optional and narrows the target set.
 
 ```bash
-rea list-browser-targets http://127.0.0.1:9222 --json
-rea inspect-web-page http://127.0.0.1:9222 TARGET_ID \
+rea list-browser-targets http://<IP_ADDRESS_REDACTED>:9222 --json
+rea inspect-web-page http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --observation-ms 1000 \
   --json
 ```
@@ -209,11 +209,11 @@ collection early. `window_elapsed` identifies completion of the requested wait.
 Static bundle analysis and a user-driven observation window are separate operations:
 
 ```bash
-rea analyze-web-bundle http://127.0.0.1:9222 TARGET_ID \
+rea analyze-web-bundle http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --json
-rea observe-web-session http://127.0.0.1:9222 TARGET_ID \
+rea observe-web-session http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --observation-ms 10000 --json
-rea discover-webmcp-tools http://127.0.0.1:9222 TARGET_ID \
+rea discover-webmcp-tools http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --json
 ```
 
@@ -250,7 +250,7 @@ registered tools reflect the document as loaded.
 Accessibility names/descriptions, console primitive text, JSON body shapes, WebSocket shapes, script content, and storage key names are selected independently:
 
 ```bash
-rea inspect-web-page http://127.0.0.1:9222 TARGET_ID \
+rea inspect-web-page http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --include-accessibility-text \
   --include-console-text \
   --include-json-body-shapes \
@@ -265,7 +265,7 @@ Accessibility text, script content, query values, and explicitly requested primi
 Screenshot capture returns the complete visible viewport as an inline image artifact:
 
 ```bash
-rea capture-web-screenshot http://127.0.0.1:9222 TARGET_ID \
+rea capture-web-screenshot http://<IP_ADDRESS_REDACTED>:9222 TARGET_ID \
   --json
 ```
 
@@ -273,7 +273,7 @@ rea capture-web-screenshot http://127.0.0.1:9222 TARGET_ID \
 
 ```json
 {
-  "cdp_endpoint": "http://127.0.0.1:9222",
+  "cdp_endpoint": "http://<IP_ADDRESS_REDACTED>:9222",
   "target_id": "TARGET_ID_FROM_LIST_BROWSER_TARGETS"
 }
 ```
