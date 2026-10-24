@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:27:45.041Z
+# Engine: deterministic
+
 """Real loopback HTTP/3 laboratory using aioquic and caller-supplied mitmdump.
 
 Run inside a disposable Linux guest. All native records are written by
