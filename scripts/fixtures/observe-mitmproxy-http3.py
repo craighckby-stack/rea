@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:28:03.721Z
+# Engine: deterministic
+
 """Test-only observation of real flows; never synthesizes flow or stream IDs."""
 
 import base64
