@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:45:06.659Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 /** Maximum admitted vendor response bytes, shared by Hopper setup adapters. */
 export const HOPPER_DOWNLOAD_BYTES = 100_000_000;
 
