@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:56.230Z
+# Engine: deterministic
+
 """Deterministic RPC receipt failures; not real-provider or model evidence."""
 import json
 from pathlib import Path
