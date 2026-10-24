@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:48.901Z
+# Engine: deterministic
+
 """Exercise real Codex MCP discovery/calls without starting a model turn."""
 import argparse
 import asyncio
