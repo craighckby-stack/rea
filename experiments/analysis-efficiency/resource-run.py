@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:11.192Z
+# Engine: deterministic
+
 """Run one owned experiment in a bounded, transient Linux systemd scope."""
 
 import argparse
