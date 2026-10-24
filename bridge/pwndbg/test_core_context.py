@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:39.077Z
+# Engine: deterministic
+
 """Producer regressions with controlled GDB state, not native debugger qualification."""
 import json
 import os
