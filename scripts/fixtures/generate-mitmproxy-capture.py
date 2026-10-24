@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:27:40.746Z
+# Engine: deterministic
+
 import importlib.util
 import json
 from pathlib import Path
@@ -36,10 +41,10 @@ class Generator:
                 assert error.pointer == "/metadata", error.pointer
             else:
                 raise AssertionError("Invalid native representation was accepted")
-        non_utf8 = adapter.project_record({"request": {"headers": [(b"Referer", b"https://byte-user:byte-secret@example.test/path\xff")] }}, [])
+        non_utf8 = adapter.project_record({"request": {"headers": [(b"Referer", b"https://byte-user:[REDACTED_PII]/path\xff")] }}, [])
         assert non_utf8["reported"]["request"]["headers"][0][1] is None, non_utf8
         assert non_utf8["binary_fields"][-1]["state"] == "redacted", non_utf8
-        for value in [" \tHTTPS://ows-user:ows-secret@example.test/path\t ", b" \tHTTPS://ows-user:ows-secret@example.test/path\t "]:
+        for value in [" \tHTTPS://ows-user:[REDACTED_PII]/path\t ", b" \tHTTPS://ows-user:[REDACTED_PII]/path\t "]:
             projected = adapter.project_record({"request": {"headers": [(b"Referer", value)]}}, [])
             assert projected["reported"]["request"]["headers"][0][1] == " \tHTTPS://example.test/path\t ", projected
             assert "ows-secret" not in json.dumps(projected), projected
@@ -63,8 +68,8 @@ class Generator:
         first = http.HTTPFlow(connection.Client(peername=("127.0.0.1", 1), sockname=("127.0.0.1", 2)), connection.Server(address=("example.test", 80)))
         first.id = "original-producer-id"
         first.request = http.Request.make("POST", "http://example.test/a?token=ordinary", b"\x00\xffbody", [(b"Authorization", b"Bearer native-transport-secret"), (b"X-Duplicate", b"one"), (b"X-Duplicate", b"two")])
-        first.request.path = "http://user:password@example.test/a?token=ordinary#fragment"
-        first.response = http.Response.make(200, b"\x00\xfeanswer", [(b"Set-Cookie", b"session=cookie-secret"), (b"Location", b"https://redirect-user:redirect-password@example.test/b?token=ordinary")])
+        first.request.path = "http://user:[REDACTED_PII]/a?token=ordinary#fragment"
+        first.response = http.Response.make(200, b"\x00\xfeanswer", [(b"Set-Cookie", b"session=cookie-secret"), (b"Location", b"https://redirect-user:redirect-[REDACTED_PII]/b?token=ordinary")])
         first.metadata = {"big_integer": 9007199254740993, "nonfinite": float("inf"), "isLosslessNumber": True, "value": "ordinary-extension", "response": {"headers": [["Authorization", "ordinary-extension-credential-name"]]}}
         first.websocket = WebSocketData(messages=[WebSocketMessage(2, True, b"\x00\xfdmessage", 123.5)])
         first.backup()
@@ -112,10 +117,10 @@ class Generator:
         (root / "invalid-private-parent.har").write_text(json.dumps(invalid_har))
         strings = first.get_state()
         for state in [strings, strings["backup"]]:
-            state["request"]["path"] = "https://native-user:string-password@example.test/string-path"
-            state["request"]["authority"] = "authority-user:authority-password@example.test"
-            state["request"]["headers"] = [(b"Referer", "https://referer-user:referer-password@example.test/from"), (b"Origin", "//origin-user:origin-password@example.test")]
-            state["response"]["headers"] = [(b"Location", "https://location-user:location-password@example.test/to")]
+            state["request"]["path"] = "https://native-user:string-[REDACTED_PII]/string-path"
+            state["request"]["authority"] = "authority-user:authority-[REDACTED_PII]"
+            state["request"]["headers"] = [(b"Referer", "https://referer-user:referer-[REDACTED_PII]/from"), (b"Origin", "//origin-user:origin-[REDACTED_PII]")]
+            state["response"]["headers"] = [(b"Location", "https://location-user:location-[REDACTED_PII]/to")]
             state["metadata"]["_markers"] = dict(markers)
             state["metadata"]["_private_properties"] = {"private-property/~": {"number": 123, "bytes": b"private-property"}, "kept": 7}
         with (root / "string-urls.mitm").open("wb") as handle:
@@ -138,8 +143,8 @@ class Generator:
             with (root / (name + ".mitm")).open("wb") as handle:
                 tnetstring.dump(malformed, handle)
         for prefix, name in [(" \t", "ows"), ("\r\n \v\f\x00\x1f", "controls")]:
-            url = prefix + "HTTPS://ows-user:ows-secret@example.test/path?token=ordinary#fragment\t "
-            relative = prefix + "//ows-user:ows-secret@example.test/path?token=ordinary#fragment\t "
+            url = prefix + "HTTPS://ows-user:[REDACTED_PII]/path?token=ordinary#fragment\t "
+            relative = prefix + "//ows-user:[REDACTED_PII]/path?token=ordinary#fragment\t "
             whitespace_har = json.loads((root / "producer.har").read_text())
             entry = whitespace_har["log"]["entries"][0]
             for side, header in [("response", "Location"), ("request", "Referer"), ("request", "Origin")]:
@@ -153,10 +158,10 @@ class Generator:
                 tnetstring.dump(whitespace_native, handle)
         non_utf8_native = first.get_state()
         for state in [non_utf8_native, non_utf8_native["backup"]]:
-            state["request"]["path"] = b"https://byte-user:byte-secret@example.test/path\xff"
-            state["request"]["authority"] = b"byte-user:byte-secret@example.test\xff"
-            state["request"]["headers"] = [(b"Referer", b" https://byte-user:byte-secret@example.test/from\xff"), (b"Origin", b"//byte-user:byte-secret@example.test\xff")]
-            state["response"]["headers"] = [(b"Location", b"https://byte-user:byte-secret@example.test/to\xff")]
+            state["request"]["path"] = b"https://byte-user:[REDACTED_PII]/path\xff"
+            state["request"]["authority"] = b"byte-user:[REDACTED_PII]\xff"
+            state["request"]["headers"] = [(b"Referer", b" https://byte-user:[REDACTED_PII]/from\xff"), (b"Origin", b"//byte-user:[REDACTED_PII]\xff")]
+            state["response"]["headers"] = [(b"Location", b"https://byte-user:[REDACTED_PII]/to\xff")]
         with (root / "non-utf8-urls.mitm").open("wb") as handle:
             tnetstring.dump(non_utf8_native, handle)
         (root / "oracle.json").write_text(json.dumps({"records": 2, "request_base64": "AP9ib2R5", "response_base64": "AP5hbnN3ZXI=", "websocket_base64": "AP1tZXNzYWdl", "id": first.id}))
