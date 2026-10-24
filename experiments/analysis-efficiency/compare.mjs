@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:24:03.309Z
+ * Engine: deterministic
+ */
 import { isDeepStrictEqual } from "node:util";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -34,7 +40,7 @@ const sameSettings = [
   "provider_search_path_sha256",
   "provider_environment_policy_sha256",
   "measure_source_sha256",
-  "native_workflow_source_sha256",
+  "[REDACTED_HIGH_ENTROPY_KEY]",
   "packet_workflow_source_sha256",
   "packet_oracle_source_sha256",
   "signal_workflow_source_sha256",
@@ -50,7 +56,7 @@ const settingDifferences = sameSettings.filter(
   (key) =>
     !isDeepStrictEqual(left[key], right[key]) ||
     ((key === "provider_search_path_sha256" ||
-      (key === "native_workflow_source_sha256" &&
+      (key === "[REDACTED_HIGH_ENTROPY_KEY]" &&
         typeof left.native_question === "string")) &&
       !/^[a-f0-9]{64}$/.test(left[key] ?? "")),
 );
