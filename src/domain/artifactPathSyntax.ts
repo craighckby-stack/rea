@@ -1,4 +1,16 @@
 /**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:34:36.757Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
+/**
  * Pure string predicates for artifact path syntax. The local artifact
  * resolver, the Electron native specifier check, and (by reference) the
  * live-DOM and source-map URL handling share these character-level rules.
