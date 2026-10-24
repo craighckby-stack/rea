@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:14:53.003Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { expect, it } from "vitest";
 import { decodeQlogCapture } from "./QlogCapture.js";
 import { decodeCaptureText } from "./CaptureJson.js";
@@ -145,7 +157,7 @@ it("excludes structural auth material and explicit normalized values without gue
           headers: [
             { name: "authorization", value: "Bearer credential" },
             { name: ":path", value: "/?token=ordinary" },
-            { name: "location", value: "https://user:pass@example.test/a" },
+            { name: "location", value: "https://user:[REDACTED_PII]/a" },
           ],
         },
       },
