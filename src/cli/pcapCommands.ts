@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:17:49.986Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { z } from "incur";
 import { PcapAnalysisService } from "../application/pcap/PcapAnalysisService.js";
 import type { PcapAnalysisPort } from "../application/pcap/PcapAnalysisPort.js";
