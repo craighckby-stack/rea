@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:33:41.267Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 /** Class-file identity used to disambiguate JVM CAFEBABE from Mach-O FAT. */
 class ClassFileCursor {
   private offset = 0;
