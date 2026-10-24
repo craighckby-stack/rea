@@ -1,9 +1,20 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:11:23.448Z
+ * Engine: LLM
+ */
 import { expect, it } from "vitest";
 import type { BrowserContext, Page } from "playwright-core";
 
 import { browserScenarioSchema } from "../domain/browserScenario.js";
 import { BrowserScenarioSecrets } from "./BrowserScenarioSecrets.js";
 import { capturePlaywrightStepArtifacts } from "./PlaywrightScenarioArtifacts.js";
+import { sanitizeUrl } from "./sanitization/urlSanitizer.js";
+import { sanitizeCookies } from "./sanitization/cookieSanitizer.js";
+import { sanitizeStorage } from "./sanitization/storageSanitizer.js";
+import { sanitizeHistory } from "./sanitization/historySanitizer.js";
+import { sanitizeDom } from "./sanitization/domSanitizer.js";
 
 const scenario = browserScenarioSchema.parse({
   browser: {
