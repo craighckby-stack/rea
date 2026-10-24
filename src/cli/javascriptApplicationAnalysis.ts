@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:17:22.087Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { JAVASCRIPT_APPLICATION_PROVIDER } from "../application/InvestigationProviders.js";
 import { createProgressReporter } from "../application/ProgressReporter.js";
 import { ArtifactReaderFailure } from "../artifacts/ArtifactReader.js";
