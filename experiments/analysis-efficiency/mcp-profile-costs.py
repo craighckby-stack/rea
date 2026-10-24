@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:44.110Z
+# Engine: deterministic
+
 """Summarize recorded Codex discovery tasks; tiktoken==0.12.0 is a proxy only."""
 import argparse
 import hashlib
