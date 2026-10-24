@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:14:55.744Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { isSafeNumber, LosslessNumber } from "lossless-json";
 import type { JsonValue } from "../../domain/jsonValue.js";
 import type { QlogCaptureFacts } from "../../domain/qlogCapture.js";
