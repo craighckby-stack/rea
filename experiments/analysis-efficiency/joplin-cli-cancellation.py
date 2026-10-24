@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:37.407Z
+# Engine: deterministic
+
 #!/usr/bin/env python3
 """Verify real Joplin cancellation through REA's compiled public CLI.
 
