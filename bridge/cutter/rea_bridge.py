@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:19:47.469Z
+# Engine: deterministic
+
 """REA's experimental local bridge plugin for Cutter.
 
 Install this file in Cutter's user plugin directory. The bridge is REA-owned
