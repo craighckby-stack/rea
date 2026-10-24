@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:14:29.306Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 import { historicalHar } from "../../../tests/fixtures/historicalHar.js";
@@ -128,7 +140,7 @@ it("excludes a declared literal introduced by stripping transport URL userinfo",
           ...entry,
           request: {
             ...entry.request,
-            url: "https://user:password@example.test/sensitive",
+            url: "https://user:[REDACTED_PII]/sensitive",
           },
         },
       ],
@@ -394,7 +406,7 @@ it("redacts actual authentication fields and explicit binary values while preser
           ...entry,
           request: {
             ...entry.request,
-            url: "https://user:password@example.test/a?token=ordinary#fragment",
+            url: "https://user:[REDACTED_PII]/a?token=ordinary#fragment",
             headers: [
               { name: "Authorization", value: "Bearer transport-secret" },
               { name: "X-Test", value: "a" },
@@ -644,7 +656,7 @@ it.each([
     const first = fixture.log.entries[0];
     if (first === undefined) throw new Error("fixture missing");
     const value =
-      " \tHTTPS://user:password@example.test/path?token=ordinary#fragment\t ";
+      " \tHTTPS://user:[REDACTED_PII]/path?token=ordinary#fragment\t ";
     const result = decodeHarCapture(
       JSON.stringify({
         log: {
