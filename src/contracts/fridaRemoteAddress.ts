@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:23:53.444Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 /** Accept a Frida host address, optionally with a TCP port, without URL credentials or paths. */
 export const isValidFridaRemoteAddress = (address: string): boolean => {
   if (address.length === 0 || address.length > 2048) return false;
