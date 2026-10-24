@@ -1,8 +1,17 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:31:18.971Z
+ * Engine: LLM
+ */
 import { formatGeneratedFile } from "./format-generated-file.mjs";
-
 import { assertSameNames, digest, loadSources } from "./catalog-core.mjs";
 import { createCliInventory } from "./catalog-cli.mjs";
 import { providerCatalog, toolFamilyCatalog } from "./catalog-builders.mjs";
+import { extractMetadata } from "./catalog-metadata.mjs";
+import { sanitizeEntropy } from "./catalog-sanitization.mjs";
+import { serializeCatalog } from "./catalog-serialization.mjs";
+import { CatalogInterface } from "./catalog-interface.mjs";
 
 /** Project current runtime contracts into deterministic, machine-readable facts. */
 export const createProductCatalog = async (root) => {
@@ -15,17 +24,19 @@ export const createProductCatalog = async (root) => {
   );
   const tools = toolFamilyCatalog(sources);
   const providers = providerCatalog(sources);
-  const metadata = sources.packageMetadata.PACKAGE_METADATA;
-  return {
+  const metadata = extractMetadata(sources.packageMetadata.PACKAGE_METADATA);
+  const sanitizedMetadata = sanitizeEntropy(metadata);
+  
+  const catalog = new CatalogInterface({
     package: {
-      name: metadata.name,
-      version: metadata.version,
+      name: sanitizedMetadata.name,
+      version: sanitizedMetadata.version,
       sdk: {
-        server: metadata.serverSdkVersion,
-        client: metadata.clientSdkVersion,
-        core: metadata.coreSdkVersion,
+        server: sanitizedMetadata.serverSdkVersion,
+        client: sanitizedMetadata.clientSdkVersion,
+        core: sanitizedMetadata.coreSdkVersion,
       },
-      skill_version: metadata.skillVersion,
+      skill_version: sanitizedMetadata.skillVersion,
     },
     tools,
     providers,
@@ -45,16 +56,17 @@ export const createProductCatalog = async (root) => {
     runtime_catalog: {
       counts: sources.catalogIdentity.CATALOG_IDENTITY.counts,
       digests: {
-        // Full runtime schema digests belong to server identity, not this facts projection.
         providers_sha256: digest(providers),
       },
     },
-  };
+  });
+  
+  return catalog;
 };
 
 /** Stable build-generated representation of the product catalog. */
 export const serializeProductCatalog = (catalog) =>
   formatGeneratedFile(
     "docs/public/product-catalog.json",
-    JSON.stringify(catalog, null, 2),
+    serializeCatalog(catalog),
   );
