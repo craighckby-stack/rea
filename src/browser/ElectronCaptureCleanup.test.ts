@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:09:12.637Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { createDeferred } from "../../tests/fixtures/binarySession.js";
 import { ArtifactResourceScope } from "../artifacts/ArtifactResourceScope.js";
