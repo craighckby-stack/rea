@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:30.507Z
+# Engine: deterministic
+
 """Fixed core-only GDB/pwndbg operation; no caller commands or historical PID lookup."""
 import json
 import os
