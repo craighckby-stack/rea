@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:02:47.891Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { posix, win32 } from "node:path";
 
 import type { JsonValue } from "../../domain/jsonValue.js";
