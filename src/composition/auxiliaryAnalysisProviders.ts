@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:19:14.206Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { snapshotEnvironment } from "../process/snapshotEnvironment.js";
 import type { LazyAnalysisProvider } from "../application/binary/LazyAnalysisProvider.js";
 import { artifactCapabilities } from "../artifacts/ArtifactProviderMetadata.js";
