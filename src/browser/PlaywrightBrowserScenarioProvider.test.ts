@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:09:33.113Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { failBrowserScenarioOperation } from "./PlaywrightScenarioBrowser.js";
 import { AnalysisCleanupLease } from "../artifacts/AnalysisCleanupLease.js";
 // Fake-backed composition coverage; real browser verification lives in
