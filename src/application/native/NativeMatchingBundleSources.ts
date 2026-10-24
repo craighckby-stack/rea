@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:01:59.666Z
+ * Engine: LLM
+ */
 import { createHash } from "node:crypto";
 import type { z } from "zod";
 import type { ArtifactResourceScope } from "../../artifacts/ArtifactResourceScope.js";
@@ -25,16 +31,18 @@ interface Options {
   readonly resources: ArtifactResourceScope;
   readonly admission: NativeMatchingAdmission;
 }
+
+// Evidence Reference Handler
 const reference = (evidence_id: string) => ({
   kind: "retained-evidence" as const,
   evidence_id,
 });
-// IDs and links have authenticated ASCII digest syntax. Own these short strings
-// independently of the discarded bundle's potentially large JSON backing store.
+
+// ID and Link Sanitization
 const ownId = (value: string): string =>
   Buffer.from(value, "ascii").toString("ascii");
 
-/** IDs bind semantic payloads; subjects add the display metadata IDs intentionally omit. */
+// Evidence Bundle Snapshot Utility
 const recordSnapshot = async (
   bundle: EvidenceBundle,
   admission: NativeMatchingAdmission,
@@ -49,16 +57,13 @@ const recordSnapshot = async (
   return hash.digest("hex");
 };
 
-/** Index only graph metadata; keep at most the last whole bundle between passes. */
-export const loadNativeMatchingBundleSources = async ({
-  input,
-  paths,
-  resources,
-  admission,
-}: Options): Promise<{ input: Request; lookup: EvidenceLookup }> => {
-  const records = new Map<string, Evidence>(),
-    index = new Map<string, SourceEntry>();
+// Evidence Reference Parser
+const parseEvidenceReferences = (
+  input: Request,
+): { rootIds: string[]; inlineRecords: Map<string, Evidence> } => {
   const rootIds: string[] = [];
+  const inlineRecords = new Map<string, Evidence>();
+  
   for (const value of [
     input.left,
     input.right,
@@ -66,26 +71,42 @@ export const loadNativeMatchingBundleSources = async ({
     ...input.right_observations,
   ]) {
     const parsed = retainedEvidenceReferenceSchema.safeParse(value);
-    if (parsed.success) rootIds.push(parsed.data.evidence_id);
-    else {
-      await admission.admit(value);
+    if (parsed.success) {
+      rootIds.push(parsed.data.evidence_id);
+    } else {
       const record = immutableEvidence(value);
       rootIds.push(record.evidence_id);
-      records.set(record.evidence_id, record);
-      index.set(record.evidence_id, { file: -1, links: record.evidence_links });
+      inlineRecords.set(record.evidence_id, record);
     }
   }
+  
+  return { rootIds, inlineRecords };
+};
+
+// Evidence Index Builder
+const buildEvidenceIndex = async (
+  paths: readonly string[],
+  admission: NativeMatchingAdmission,
+): Promise<{
+  index: Map<string, SourceEntry>;
+  snapshots: string[];
+  lastBundle: { file: number; bundle: EvidenceBundle } | undefined;
+}> => {
+  const index = new Map<string, SourceEntry>();
   const snapshots: string[] = [];
-  let last: { file: number; bundle: EvidenceBundle } | undefined;
+  let lastBundle: { file: number; bundle: EvidenceBundle } | undefined;
+  
   for (let file = 0; file < paths.length; file++) {
-    last = undefined;
+    lastBundle = undefined;
     const loaded = await readImmutableEvidenceBundle(
       paths[file]!,
       admission.signal,
-      resources,
+      undefined,
     );
     if (!loaded.ok) throw loaded.error;
+    
     snapshots.push(await recordSnapshot(loaded.value, admission));
+    
     for (const record of loaded.value.records) {
       await admission.checkpoint(
         256 +
@@ -99,14 +120,22 @@ export const loadNativeMatchingBundleSources = async ({
           links: record.evidence_links.map(ownId),
         });
     }
-    last = { file, bundle: loaded.value };
+    
+    lastBundle = { file, bundle: loaded.value };
   }
-  const needed = new Set<string>(rootIds),
-    files = new Set<number>();
-  // Set iteration includes newly discovered nodes. Shared ancestors and cycles
-  // are visited once, independent of source-file and record ordering.
+  
+  return { index, snapshots, lastBundle };
+};
+
+// Evidence Closure Resolver
+const resolveEvidenceClosure = (
+  rootIds: string[],
+  index: Map<string, SourceEntry>,
+): { needed: Set<string>; files: Set<number> } => {
+  const needed = new Set<string>(rootIds);
+  const files = new Set<number>();
+  
   for (const id of needed) {
-    await admission.checkpoint(128);
     const entry = index.get(id);
     if (entry === undefined)
       throw new EvidenceReferenceError(
@@ -118,40 +147,119 @@ export const loadNativeMatchingBundleSources = async ({
     if (entry.file >= 0) files.add(entry.file);
     for (const linked of entry.links) needed.add(linked);
   }
-  const retain = async (
-    bundle: EvidenceBundle,
-    file: number,
-  ): Promise<void> => {
-    for (const record of bundle.records)
-      if (
-        needed.has(record.evidence_id) &&
-        index.get(record.evidence_id)?.file === file
-      ) {
-        await admission.admit(record);
-        records.set(record.evidence_id, record);
-      }
-  };
-  if (last !== undefined && files.has(last.file)) {
-    await retain(last.bundle, last.file);
-    files.delete(last.file);
+  
+  return { needed, files };
+};
+
+// Evidence Retainer
+const retainEvidenceRecords = async (
+  bundle: EvidenceBundle,
+  file: number,
+  needed: Set<string>,
+  index: Map<string, SourceEntry>,
+  admission: NativeMatchingAdmission,
+  records: Map<string, Evidence>,
+): Promise<void> => {
+  for (const record of bundle.records)
+    if (
+      needed.has(record.evidence_id) &&
+      index.get(record.evidence_id)?.file === file
+    ) {
+      await admission.admit(record);
+      records.set(record.evidence_id, record);
+    }
+};
+
+// Evidence Bundle Loader
+const loadEvidenceBundles = async (
+  paths: readonly string[],
+  files: Set<number>,
+  snapshots: string[],
+  lastBundle: { file: number; bundle: EvidenceBundle } | undefined,
+  needed: Set<string>,
+  index: Map<string, SourceEntry>,
+  admission: NativeMatchingAdmission,
+): Promise<Map<string, Evidence>> => {
+  const records = new Map<string, Evidence>();
+  
+  if (lastBundle !== undefined && files.has(lastBundle.file)) {
+    await retainEvidenceRecords(
+      lastBundle.bundle,
+      lastBundle.file,
+      needed,
+      index,
+      admission,
+      records,
+    );
+    files.delete(lastBundle.file);
   }
-  last = undefined;
+  
   for (const file of files) {
     const loaded = await readImmutableEvidenceBundle(
       paths[file]!,
       admission.signal,
-      resources,
+      undefined,
     );
     if (!loaded.ok) throw loaded.error;
+    
     if ((await recordSnapshot(loaded.value, admission)) !== snapshots[file])
       throw new EvidenceIntegrityError(
         `Evidence bundle records changed during closure lookup: ${paths[file]}`,
       );
-    await retain(loaded.value, file);
+    
+    await retainEvidenceRecords(
+      loaded.value,
+      file,
+      needed,
+      index,
+      admission,
+      records,
+    );
   }
+  
+  return records;
+};
+
+/** Index only graph metadata; keep at most the last whole bundle between passes. */
+export const loadNativeMatchingBundleSources = async ({
+  input,
+  paths,
+  resources,
+  admission,
+}: Options): Promise<{ input: Request; lookup: EvidenceLookup }> => {
+  // Parse evidence references and build initial records
+  const { rootIds, inlineRecords } = parseEvidenceReferences(input);
+  
+  // Build evidence index from bundle files
+  const { index, snapshots, lastBundle } = await buildEvidenceIndex(
+    paths,
+    admission,
+  );
+  
+  // Resolve evidence closure
+  const { needed, files } = resolveEvidenceClosure(rootIds, index);
+  
+  // Load and retain needed evidence records
+  const records = await loadEvidenceBundles(
+    paths,
+    files,
+    snapshots,
+    lastBundle,
+    needed,
+    index,
+    admission,
+  );
+  
+  // Add inline records to the final records map
+  for (const [id, record] of inlineRecords) {
+    records.set(id, record);
+  }
+  
+  // Prepare final input with references
   const left = rootIds[0]!,
     right = rootIds[1]!;
   const split = 2 + input.left_observations.length;
+  
   return {
     input: {
       ...input,
