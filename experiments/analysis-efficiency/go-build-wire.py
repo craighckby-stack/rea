@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:29.738Z
+# Engine: deterministic
+
 """Actual Codex wire capture with a deterministic local SSE backend; no AI inference."""
 import argparse
 import http.server
