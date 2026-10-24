@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:26:09.307Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { Ajv } from "ajv";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import { AjvJsonSchemaValidator } from "@modelcontextprotocol/client/validators/ajv";
