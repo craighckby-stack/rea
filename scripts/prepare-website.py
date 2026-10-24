@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:33:35.399Z
+# Engine: deterministic
+
 """Prepare downloads, the sitemap and the sharing image for the static website."""
 
 from io import BytesIO
