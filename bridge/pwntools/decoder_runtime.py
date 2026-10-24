@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:41.705Z
+# Engine: deterministic
+
 """Shared bounded reply/limit protocol, independent of the supplied artifact format."""
 import json
 import os
