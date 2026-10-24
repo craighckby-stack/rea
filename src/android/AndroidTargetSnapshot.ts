@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:39:11.182Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { createHash } from "node:crypto";
 import type { ReadStream, Stats, WriteStream } from "node:fs";
 import { chmod, open, rm, stat, type FileHandle } from "node:fs/promises";
