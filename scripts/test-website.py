@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:33:57.637Z
+# Engine: deterministic
+
 """Exercise automatic route discovery and mistakes that break search metadata."""
 
 import contextlib
@@ -235,7 +240,7 @@ class WebsiteMaintenanceChecks(unittest.TestCase):
         original = json.loads((ROOT / "website/public/contributors/people.json").read_text())
         for field, value in (("id", True), ("id", 0), ("login", ""), ("type", "unknown"),
                              ("html_url", "javascript:alert(1)"), ("html_url", "https://github.com.evil.test/person"),
-                             ("avatar_url", "https://token@avatars.githubusercontent.com/u/1")):
+                             ("avatar_url", "https://[REDACTED_PII]/u/1")):
             with self.subTest(field=field, value=value):
                 data = {**original, "contributors": [{**original["contributors"][0], field: value}]}
                 with self.assertRaises(ValueError):
