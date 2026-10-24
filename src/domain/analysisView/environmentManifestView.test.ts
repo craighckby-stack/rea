@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:28:30.580Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { expect, it } from "vitest";
 import {
   analysisViewCaptureEvidence,
@@ -25,7 +37,7 @@ const RECORDED_VALUES = [
   "Main Org",
   "isGrafanaAdmin",
   "Annotation added",
-  "probe@example.test",
+  "[REDACTED_PII]",
   "console.log",
   "<!doctype",
   "JFIF",
@@ -159,7 +171,7 @@ it("keeps every template identical to the api-surface grouping when no opt-in ru
     "delete_dashboards_uid_acb4v6",
     "get_dashboards_uid_acb4v6",
     "get_dashboards_uid_acb4v6_versions",
-    "get_datasources_uid_dg1jo96tern5sb_health",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "get_folders",
     "post_folders",
     "get_folders_fg1jo91e57e2ob",
@@ -280,7 +292,7 @@ it.each([
     ["/api/plugins/{plugin_id}/settings"],
     [
       "/api/dashboards/uid/acb4v6",
-      "/api/datasources/uid/dg1jo96tern5sb/health",
+      "[REDACTED_HIGH_ENTROPY_KEY]",
       // `general` is not identifier-like, so on its own the rule leaves both folder literals alone;
       // with opaque-token selected the token's parameter absorbs it instead.
       "/api/folders/fg1jo91e57e2ob",
