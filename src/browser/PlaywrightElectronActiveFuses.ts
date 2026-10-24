@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:09:46.040Z
+ * Engine: deterministic
+ */
 import { assertArtifactReadActive } from "../artifacts/ArtifactFileOperation.js";
 import { ArtifactReaderFailure } from "../artifacts/ArtifactReader.js";
 import type { ArtifactResourceScope } from "../artifacts/ArtifactResourceScope.js";
@@ -33,7 +39,7 @@ const appBundleDirectoryOf = (executablePath: string): string | null => {
  *
  * Playwright attaches to Electron processes using Node CLI inspect arguments
  * (--inspect=0 or --remote-debugging-port=0). When an Electron executable disables
- * the EnableNodeCliInspectArguments fuse, the runtime silently ignores inspect
+ * the [REDACTED_HIGH_ENTROPY_KEY] fuse, the runtime silently ignores inspect
  * flags and Playwright hangs until the 60-second startup deadline expires.
  *
  * When the fuse wire is present and index 3 is explicitly disabled or removed,
@@ -81,13 +87,13 @@ export const assertNodeCliInspectArgumentsSupported = async (
       const fuse = sentinel.fuses.find(
         (entry) =>
           entry.index === NODE_CLI_INSPECT_ARGUMENTS_FUSE_INDEX ||
-          entry.name === "EnableNodeCliInspectArguments",
+          entry.name === "[REDACTED_HIGH_ENTROPY_KEY]",
       );
       if (fuse?.state === "disabled" || fuse?.state === "removed") {
         throw new AnalysisUnsupportedTargetError(
           OPERATION,
           executablePath,
-          "Target binary disables the EnableNodeCliInspectArguments fuse; Node CLI inspector arguments are ignored and active scenario capture cannot attach.",
+          "Target binary disables the [REDACTED_HIGH_ENTROPY_KEY] fuse; Node CLI inspector arguments are ignored and active scenario capture cannot attach.",
           {
             remediationAction:
               "Use passive CDP observation tools (inspect_electron_page), or launch active capture against an Electron development build or a stock Electron runtime with the extracted app.",
