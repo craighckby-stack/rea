@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:17:04.896Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { z } from "incur";
 import { FirmwareAnalysisService } from "../application/firmware/FirmwareAnalysisService.js";
 import { createFirmwareAnalysisProvider } from "../composition/firmware.js";
