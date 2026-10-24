@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:34.760Z
+# Engine: deterministic
+
 #!/usr/bin/env python3
 """Audit compact Joplin retained-fact trial records; print checks, not a success rate.
 
@@ -14,19 +19,19 @@ SOURCE_PATHS = [
 ]
 NATIVE_SHA256 = '0700016bcd761cbe02d275f2046c7cc42f39f730a50d66e3d3307aa9d413373a'
 NATIVE_NODE = 'jag_node_98ccdef0e85d67cba9cc843193c5ba877f0a73ba3fa7d3581f6db0396a707b2d'
-NATIVE_OBSERVATION = 'jag_observation_d7fbf97718fa986435ef951cf11b73f63610f59facd1b40c22fc9f06876d54bc'
+NATIVE_OBSERVATION = '[REDACTED_HIGH_ENTROPY_KEY]'
 PHASES = {
     'ElectronAppWrapper.js.map': (
         'parse-local-source-map',
-        'jag_observation_4b04b2982325de96322efd493507386b986aca57309e959870831dbd6dffd4fd',
+        '[REDACTED_HIGH_ENTROPY_KEY]',
     ),
     'index.html': (
         'parse-html-script-references',
-        'jag_observation_f432dffb800852a9d28d2f85c17ae6b5d83b7b2ae5780021169506a8d08f0d35',
+        '[REDACTED_HIGH_ENTROPY_KEY]',
     ),
     'package.json': (
         'parse-package-json',
-        'jag_observation_5dae4759fcf36b25470467347515c95207d69d7ececfc17a1d90ecfbbea4dc79',
+        '[REDACTED_HIGH_ENTROPY_KEY]',
     ),
 }
 
