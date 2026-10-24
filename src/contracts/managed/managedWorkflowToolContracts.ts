@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:24:57.198Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { z } from "zod";
 import { evidenceSchema } from "../../domain/evidence.js";
 import { managedNativeVerificationInputSchema } from "../../domain/managed/managedNativeVerificationSchemas.js";
