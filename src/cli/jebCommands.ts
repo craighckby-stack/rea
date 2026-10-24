@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:17:27.378Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { z } from "incur";
 import { JebAnalysisService } from "../application/jeb/JebAnalysisService.js";
 import type { JebAnalysisPort } from "../application/jeb/JebAnalysisPort.js";
