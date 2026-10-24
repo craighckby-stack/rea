@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:36:02.828Z
+ * Engine: deterministic
+ */
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import { requireMcpOperationResult } from "./lib/mcp-verifier-results.mjs";
@@ -252,14 +258,14 @@ try {
               derived: "??_7NativeAotFixture_DerivedProbe@@6B@",
               interface: "??_7NativeAotFixture_IProbe@@6B@",
               compute: "NativeAotFixture_DerivedProbe__Compute",
-              dispatch: "NativeAotFixture_Program__Dispatch",
+              dispatch: "[REDACTED_HIGH_ENTROPY_KEY]",
             }
           : {
-              base: "_ZTV26NativeAotFixture_BaseProbe",
-              derived: "_ZTV29NativeAotFixture_DerivedProbe",
-              interface: "_ZTV23NativeAotFixture_IProbe",
+              base: "[REDACTED_HIGH_ENTROPY_KEY]",
+              derived: "[REDACTED_HIGH_ENTROPY_KEY]",
+              interface: "[REDACTED_HIGH_ENTROPY_KEY]",
               compute: "NativeAotFixture_DerivedProbe__Compute",
-              dispatch: "NativeAotFixture_Program__Dispatch",
+              dispatch: "[REDACTED_HIGH_ENTROPY_KEY]",
             });
       const lookup = (address) => {
         const identity = summary.types.find((type) => type.address === address);
