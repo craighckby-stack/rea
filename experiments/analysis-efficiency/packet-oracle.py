@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:05.359Z
+# Engine: deterministic
+
 """Independent, narrow oracle for the three pinned Ethernet/IPv4 PCAPs.
 
 Reads header bytes, not TShark output. No PCAPNG, IP fragmentation or TCP
