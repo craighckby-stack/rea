@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:26:01.640Z
+# Engine: deterministic
+
 """Distinct framing, identity and admission failures in the sample-bit oracle."""
 
 import importlib.util
