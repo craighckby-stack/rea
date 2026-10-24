@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:56:21.595Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import type { JavaScriptArtifactGraphContext } from "./JavaScriptArtifactGraphContext.js";
 import { addElectronIpcBoundaries } from "./ElectronBoundaryGraphIpc.js";
 import { addElectronNativeBoundaries } from "./ElectronBoundaryGraphNative.js";
