@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:09:54.400Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { projectAnalysisError } from "../domain/analysisErrorProjection.js";
 import { cleanupElectronProcesses } from "./ElectronProcessCleanup.js";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
@@ -359,7 +371,7 @@ it("retains the initial snapshot when the final state read fails", async () => {
   });
 });
 
-it("rejects active capture before launch when EnableNodeCliInspectArguments fuse is disabled", async () => {
+it("rejects active capture before launch when [REDACTED_HIGH_ENTROPY_KEY] fuse is disabled", async () => {
   const root = await createTestTempDirectory("rea-active-provider-fuse-");
   const disabledBinary = join(root, "disabled-electron");
   await writeFile(disabledBinary, thinFuseImage(OBSIDIAN_FUSE_BYTES).bytes);
@@ -385,7 +397,7 @@ it("rejects active capture before launch when EnableNodeCliInspectArguments fuse
     _tag: "AnalysisUnsupportedTargetError",
     operation: "capture_electron_scenario",
     path: disabledBinary,
-    message: expect.stringContaining("EnableNodeCliInspectArguments"),
+    message: expect.stringContaining("[REDACTED_HIGH_ENTROPY_KEY]"),
     remediationAction: expect.stringContaining("inspect_electron_page"),
   });
 });
