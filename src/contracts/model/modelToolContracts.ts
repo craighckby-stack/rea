@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:25:02.452Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { inspectModelArtifactInputSchema } from "../../domain/model/modelArtifactQuery.js";
 import { z } from "zod";
 import { modelArtifactSchema } from "../../domain/model/modelArtifact.js";
