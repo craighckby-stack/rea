@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:09:43.270Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it, vi } from "vitest";
@@ -16,7 +28,7 @@ import { AnalysisUnsupportedTargetError } from "../domain/analysisErrorCore.js";
 import { assertNodeCliInspectArgumentsSupported } from "./PlaywrightElectronActiveFuses.js";
 
 describe("assertNodeCliInspectArgumentsSupported", () => {
-  it("rejects thin Mach-O binary when EnableNodeCliInspectArguments fuse is disabled", async () => {
+  it("rejects thin Mach-O binary when [REDACTED_HIGH_ENTROPY_KEY] fuse is disabled", async () => {
     const root = await createTestTempDirectory("rea-fuse-preflight-");
     const binaryPath = join(root, "disabled-app");
     const image = thinFuseImage(OBSIDIAN_FUSE_BYTES); // index 3 is disabled
@@ -33,12 +45,12 @@ describe("assertNodeCliInspectArgumentsSupported", () => {
       const targetError = error as AnalysisUnsupportedTargetError;
       expect(targetError.operation).toBe("capture_electron_scenario");
       expect(targetError.path).toBe(binaryPath);
-      expect(targetError.message).toContain("EnableNodeCliInspectArguments");
+      expect(targetError.message).toContain("[REDACTED_HIGH_ENTROPY_KEY]");
       expect(targetError.remediationAction).toContain("inspect_electron_page");
     }
   });
 
-  it("passes when EnableNodeCliInspectArguments fuse is enabled", async () => {
+  it("passes when [REDACTED_HIGH_ENTROPY_KEY] fuse is enabled", async () => {
     const root = await createTestTempDirectory("rea-fuse-preflight-");
     const binaryPath = join(root, "enabled-app");
     const enabledFuses = [...OBSIDIAN_FUSE_BYTES];
@@ -72,7 +84,7 @@ describe("assertNodeCliInspectArgumentsSupported", () => {
     ).resolves.toBeUndefined();
   });
 
-  it("rejects Windows PE binary when EnableNodeCliInspectArguments fuse is disabled", async () => {
+  it("rejects Windows PE binary when [REDACTED_HIGH_ENTROPY_KEY] fuse is disabled", async () => {
     const root = await createTestTempDirectory("rea-fuse-preflight-");
     const binaryPath = join(root, "disabled-pe.exe");
     const image = peFuseImage(OBSIDIAN_FUSE_BYTES);
@@ -83,7 +95,7 @@ describe("assertNodeCliInspectArgumentsSupported", () => {
     ).rejects.toThrow(AnalysisUnsupportedTargetError);
   });
 
-  it("rejects Linux ELF binary when EnableNodeCliInspectArguments fuse is disabled", async () => {
+  it("rejects Linux ELF binary when [REDACTED_HIGH_ENTROPY_KEY] fuse is disabled", async () => {
     const root = await createTestTempDirectory("rea-fuse-preflight-");
     const binaryPath = join(root, "disabled-elf");
     const image = elfFuseImage(OBSIDIAN_FUSE_BYTES);
@@ -143,7 +155,7 @@ describe("assertNodeCliInspectArgumentsSupported", () => {
       const targetError = error as AnalysisUnsupportedTargetError;
       expect(targetError.operation).toBe("capture_electron_scenario");
       expect(targetError.path).toBe(launcherBinary);
-      expect(targetError.message).toContain("EnableNodeCliInspectArguments");
+      expect(targetError.message).toContain("[REDACTED_HIGH_ENTROPY_KEY]");
     }
   });
 
