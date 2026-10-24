@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:07:02.066Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import type { BrowserObservationOperation } from "../domain/browserObservationErrors.js";
 import { BrowserObservationError } from "../domain/browserObservationError.js";
 import type { CdpConnection } from "./CdpConnection.js";
