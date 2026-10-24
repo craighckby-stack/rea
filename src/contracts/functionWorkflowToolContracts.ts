@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:24:07.401Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { jsonObjectSchema } from "../domain/jsonValue.js";
 import { enhancedInputSchemas } from "./enhancedInputs.js";
 import { TOOL_EXAMPLE_OVERRIDES } from "./toolContractExamples.js";
