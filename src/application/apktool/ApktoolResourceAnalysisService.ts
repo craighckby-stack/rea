@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:49:34.925Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import type { ApktoolResourceAnalysisPort } from "./ApktoolResourceAnalysisPort.js";
 import type { ExecutionOptions } from "../AnalysisProvider.js";
 import {
