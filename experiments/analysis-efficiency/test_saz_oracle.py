@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:58.866Z
+# Engine: deterministic
+
 """Stored-byte semantics and fail-before-allocation admission, not providers."""
 
 import base64
