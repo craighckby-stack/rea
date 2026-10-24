@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:24.965Z
+# Engine: deterministic
+
 """Check selected model facts against public producer observations, not exit status."""
 
 import argparse
