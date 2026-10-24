@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:53.295Z
+# Engine: deterministic
+
 """Receipt semantics; real systemd/cgroup workflows are verified separately."""
 
 import json
