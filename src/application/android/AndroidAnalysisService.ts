@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:49:19.832Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import type { AndroidAnalysisPort } from "./AndroidAnalysisPort.js";
 import type { ExecutionOptions } from "../AnalysisProvider.js";
 import { parseBinaryTarget } from "../BinaryTargetResolver.js";
