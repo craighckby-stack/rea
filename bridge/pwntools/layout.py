@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:44.325Z
+# Engine: deterministic
+
 """Catch typed resource failures while loading or running the owned ELF adapter.
 
 Only this package's fixed sibling is executed; caller input stays in request.json.
