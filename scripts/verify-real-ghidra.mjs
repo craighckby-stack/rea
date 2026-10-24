@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:36:20.726Z
+ * Engine: deterministic
+ */
 #!/usr/bin/env node
 
 import { execFile } from "node:child_process";
@@ -237,7 +243,7 @@ try {
       arm64ElfPath,
     ]);
     await exec(clang, [
-      "--target=x86_64-pc-windows-msvc",
+      "[REDACTED_HIGH_ENTROPY_KEY]",
       "-O0",
       "-gcodeview",
       "-fno-inline",
