@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:13.833Z
+# Engine: deterministic
+
 """Observe a finished payload while its owned cgroup observer is still alive."""
 
 import json
