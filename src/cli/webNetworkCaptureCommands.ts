@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:18:22.242Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { z } from "incur";
 import { WEB_NETWORK_CAPTURE_FORMATS } from "../domain/webNetworkCapture.js";
 import { createWebNetworkCaptureService } from "../composition/webNetworkCaptures.js";
