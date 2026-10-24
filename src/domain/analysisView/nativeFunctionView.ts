@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:29:36.408Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { analysisViewInputError } from "./analysisViewErrors.js";
 import { analysisTextPage } from "./analysisViewText.js";
 import type { AnalysisError } from "../analysisErrorBase.js";
