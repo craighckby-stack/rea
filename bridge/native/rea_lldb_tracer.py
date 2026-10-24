@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:14.668Z
+# Engine: deterministic
+
 """Bounded native call observation executed inside LLDB's embedded Python.
 
 REA imports this module into `lldb --batch` and runs `rea_trace <config.json>`.
