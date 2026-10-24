@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:16:39.042Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import type { DirectAnalysis } from "../composition/directAnalysis.js";
 import type { Logger } from "pino";
 import { registerCoreBinaryCommands } from "./coreBinaryCommands.js";
