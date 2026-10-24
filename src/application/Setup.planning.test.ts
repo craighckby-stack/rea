@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:47:12.618Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { describe, expect, it } from "vitest";
 
 import { runSetup } from "./Setup.js";
@@ -510,7 +522,7 @@ describe("setup workflow lifecycle and provider planning", () => {
       "GHIDRA_INSTALL_DIR=/opt/ghidra_12.1.4_PUBLIC",
     );
     expect(plan.plannedActions[0]?.detail).toContain(
-      "JAVA_HOME=/usr/lib/jvm/jdk-21",
+      "[REDACTED_HIGH_ENTROPY_KEY]",
     );
     expect(host.hopperInstalls).toBe(0);
     expect(host.configurations).toBe(0);
