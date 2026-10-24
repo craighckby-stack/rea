@@ -1,4 +1,16 @@
 /**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:34:06.969Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
+/**
  * Shared aggregate plaintext-work ceiling for archive-backed operations.
  * ZIP compression and PCK aliases can both multiply hashing and output bytes.
  * Charge every readable logical occurrence, including repeated physical ranges.
