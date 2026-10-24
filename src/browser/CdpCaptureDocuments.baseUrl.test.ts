@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:07:18.355Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { describe, expect, it } from "vitest";
 
 import { inspectWebPageInputSchema } from "../domain/browserObservation.js";
@@ -143,7 +155,7 @@ describe("DOM metadata document base URLs", () => {
 
   it.each([
     "javascript:void(0)",
-    "mailto:someone@example.test",
+    "mailto:[REDACTED_PII]",
     "data:text/plain,hello",
     "ftp://app.example.test/file",
   ])("classifies the non-http(s) destination %s as unsupported", (href) => {
@@ -170,7 +182,7 @@ describe("DOM metadata document base URLs", () => {
         undefined,
         "assets/",
         documentUrl,
-        "https://user:secret@app.example.test/guide",
+        "https://user:[REDACTED_PII]/guide",
       ),
     );
     expect(result.urls[1]).toMatchObject({
