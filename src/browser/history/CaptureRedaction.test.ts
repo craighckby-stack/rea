@@ -1,25 +1,37 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:14:21.384Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { expect, it } from "vitest";
 import { CaptureRedaction } from "./CaptureRedaction.js";
 
 it.each([
   {
-    value: " https://user:password@example.test/path ",
+    value: " https://user:[REDACTED_PII]/path ",
     expected: " https://example.test/path ",
   },
   {
-    value: "\tHTTPS://user:password@example.test/path\t",
+    value: "\tHTTPS://user:[REDACTED_PII]/path\t",
     expected: "\tHTTPS://example.test/path\t",
   },
   {
-    value: " \t//user:password@example.test/path?token=ordinary#fragment\t ",
+    value: " \t//user:[REDACTED_PII]/path?token=ordinary#fragment\t ",
     expected: " \t//example.test/path?token=ordinary#fragment\t ",
   },
   {
-    value: "\r\n \v\fhttps://user:password@example.test/path",
+    value: "\r\n \v\fhttps://user:[REDACTED_PII]/path",
     expected: "\r\n \v\fhttps://example.test/path",
   },
   {
-    value: "\u0000\u001f//user:password@example.test/path",
+    value: "\u0000\u001f//user:[REDACTED_PII]/path",
     expected: "\u0000\u001f//example.test/path",
   },
 ])(
@@ -37,23 +49,23 @@ it.each([
 
 it("preserves the same URL-looking text in an ordinary extension", () => {
   const redactor = new CaptureRedaction([]);
-  const value = " \thttps://user:password@example.test/path\t ";
+  const value = " \thttps://user:[REDACTED_PII]/path\t ";
   expect(redactor.text(value, "/_extension")).toBe(value);
   expect(redactor.redactions).toEqual([]);
 });
 
 it.each([
-  "https:user:password@example.test/path",
-  "https:///user:password@example.test/path",
-  "https://\\user:password@example.test/path",
-  "https://\t/user:password@example.test/path",
-  "https://\n/user:password@example.test/path",
-  "https://\r/user:password@example.test/path",
-  "ht\ttps://user:password@example.test/path",
-  "\\\\user:password@example.test/path",
-  "/\\user:password@example.test/path",
-  "\\/user:password@example.test/path",
-  "/\t/user:password@example.test/path",
+  "https:user:[REDACTED_PII]/path",
+  "https:///user:[REDACTED_PII]/path",
+  "https://\\user:[REDACTED_PII]/path",
+  "https://\t/user:[REDACTED_PII]/path",
+  "https://\n/user:[REDACTED_PII]/path",
+  "https://\r/user:[REDACTED_PII]/path",
+  "ht\ttps://user:[REDACTED_PII]/path",
+  "\\\\user:[REDACTED_PII]/path",
+  "/\\user:[REDACTED_PII]/path",
+  "\\/user:[REDACTED_PII]/path",
+  "/\t/user:[REDACTED_PII]/path",
 ])("excludes credentials whose raw URL span is ambiguous: %s", (value) => {
   const redactor = new CaptureRedaction([]);
   expect(redactor.text(value, "/request/url", true)).toBeNull();
