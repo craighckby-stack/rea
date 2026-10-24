@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:53.440Z
+# Engine: deterministic
+
 """Bounded Linux core evidence via unchanged ELFFile/structs and pwntools ctypes.
 
 No Corefile-selected thread, executable guessing, process lookup or target launch.
