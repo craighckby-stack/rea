@@ -1,89 +1,184 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:11:37.214Z
+ * Engine: LLM
+ */
 import assert from "node:assert/strict";
 import { appendFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-/** Exact-version routes currently return false 404s; enumerate the filtered listing. */
-export async function registryPublicationState(server, request = fetch) {
-  assert.equal(typeof server?.name, "string");
-  assert.equal(typeof server?.version, "string");
-  const cursors = new Set();
-  let cursor;
-  const matches = [];
-  do {
-    const url = new URL(
-      "https://registry.modelcontextprotocol.io/v0.1/servers",
-    );
+// Registry API Module
+const REGISTRY_API = {
+  BASE_URL: "https://registry.modelcontextprotocol.io/v0.1/servers",
+  DEFAULT_LIMIT: "100",
+  TIMEOUT: 30_000,
+  
+  async fetchPage(params, request = fetch) {
+    const url = new URL(this.BASE_URL);
     url.search = new URLSearchParams({
-      search: server.name,
-      version: server.version,
+      search: params.name,
+      version: params.version,
       include_deleted: "true",
-      limit: "100",
+      limit: this.DEFAULT_LIMIT,
+      ...(params.cursor && { cursor: params.cursor })
     }).toString();
-    if (cursor !== undefined) url.searchParams.set("cursor", cursor);
+    
     const response = await request(url, {
-      signal: AbortSignal.timeout(30_000),
+      signal: AbortSignal.timeout(this.TIMEOUT),
     });
-    if (!response.ok)
+    
+    if (!response.ok) {
       throw new Error(`Registry lookup failed: HTTP ${response.status}`);
-    const page = await response.json();
+    }
+    
+    return response.json();
+  }
+};
+
+// Data Validation Layer
+const REGISTRY_SCHEMA = {
+  validatePage(page) {
     assert(Array.isArray(page?.servers), "Registry response omitted servers");
     assert(
       page.metadata && typeof page.metadata === "object",
-      "Registry response omitted metadata",
+      "Registry response omitted metadata"
     );
+    return page;
+  },
+  
+  validateServer(entry) {
+    assert(
+      typeof entry?.server?.name === "string" &&
+        typeof entry.server.version === "string",
+      "Malformed registry server record"
+    );
+    return entry;
+  },
+  
+  validateCursor(cursor, seenCursors) {
+    assert(
+      typeof cursor === "string" && 
+      cursor.length > 0 && 
+      !seenCursors.has(cursor),
+      "Registry returned a non-advancing cursor"
+    );
+    return cursor;
+  },
+  
+  validateOfficialStatus(entry) {
+    assert.equal(
+      entry._meta?.["io.modelcontextprotocol.registry/official"]?.status,
+      "active",
+      "Existing registry version is not active"
+    );
+  },
+  
+  validateServerMatch(entry, server) {
+    assert.deepEqual(
+      entry.server,
+      server,
+      "Existing registry version differs from released metadata"
+    );
+  }
+};
+
+// Cursor Management Utility
+const CursorManager = {
+  create() {
+    return new Set();
+  },
+  
+  getNextCursor(page, seenCursors) {
+    const cursor = page.metadata.nextCursor;
+    if (cursor === undefined) return undefined;
+    
+    return REGISTRY_SCHEMA.validateCursor(cursor, seenCursors);
+  },
+  
+  hasAdvanced(cursor, seenCursors) {
+    return cursor !== undefined && seenCursors.has(cursor);
+  }
+};
+
+// State Management Module
+const PublicationStateManager = {
+  states: {
+    ABSENT: "absent",
+    PRESENT: "present"
+  },
+  
+  validateMatches(matches) {
+    assert(
+      matches.length <= 1,
+      "Registry returned ambiguous exact-version records"
+    );
+    return matches;
+  },
+  
+  determineState(matches) {
+    if (matches.length === 0) return this.states.ABSENT;
+    
+    const match = matches[0];
+    REGISTRY_SCHEMA.validateOfficialStatus(match);
+    return this.states.PRESENT;
+  }
+};
+
+// Core Functionality
+export async function registryPublicationState(server, request = fetch) {
+  assert.equal(typeof server?.name, "string");
+  assert.equal(typeof server?.version, "string");
+  
+  const seenCursors = CursorManager.create();
+  let cursor;
+  const matches = [];
+  
+  do {
+    const page = await REGISTRY_API.fetchPage({ ...server, cursor }, request);
+    REGISTRY_SCHEMA.validatePage(page);
+    
     for (const entry of page.servers) {
-      assert(
-        typeof entry?.server?.name === "string" &&
-          typeof entry.server.version === "string",
-        "Malformed registry server record",
-      );
+      const validatedEntry = REGISTRY_SCHEMA.validateServer(entry);
+      
       if (
-        entry.server.name === server.name &&
-        entry.server.version === server.version
-      )
-        matches.push(entry);
+        validatedEntry.server.name === server.name &&
+        validatedEntry.server.version === server.version
+      ) {
+        matches.push(validatedEntry);
+      }
     }
-    cursor = page.metadata.nextCursor;
+    
+    cursor = CursorManager.getNextCursor(page, seenCursors);
     if (cursor !== undefined) {
-      assert(
-        typeof cursor === "string" && cursor.length > 0 && !cursors.has(cursor),
-        "Registry returned a non-advancing cursor",
-      );
-      cursors.add(cursor);
+      seenCursors.add(cursor);
     }
   } while (cursor !== undefined);
-  assert(
-    matches.length <= 1,
-    "Registry returned ambiguous exact-version records",
-  );
-  if (matches.length === 0) return "absent";
-  assert.equal(
-    matches[0]._meta?.["io.modelcontextprotocol.registry/official"]?.status,
-    "active",
-    "Existing registry version is not active",
-  );
-  assert.deepEqual(
-    matches[0].server,
-    server,
-    "Existing registry version differs from released metadata",
-  );
-  return "present";
+  
+  PublicationStateManager.validateMatches(matches);
+  const state = PublicationStateManager.determineState(matches);
+  
+  return state;
 }
 
+// CLI Execution Logic
 if (
   process.argv[1] !== undefined &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
-  const state = await registryPublicationState(
-    JSON.parse(await readFile("server.json", "utf8")),
-  );
-  assert(process.env.GITHUB_OUTPUT, "GITHUB_OUTPUT is required");
-  await appendFile(
-    process.env.GITHUB_OUTPUT,
-    `exists=${state === "present"}\n`,
-  );
-  process.stdout.write(
-    `Registry version is ${state}; ${state === "present" ? "preserving identical published metadata" : "publication may proceed"}.\n`,
-  );
+  (async () => {
+    const server = JSON.parse(await readFile("server.json", "utf8"));
+    const state = await registryPublicationState(server);
+    
+    assert(process.env.GITHUB_OUTPUT, "GITHUB_OUTPUT is required");
+    await appendFile(
+      process.env.GITHUB_OUTPUT,
+      `exists=${state === PublicationStateManager.states.PRESENT}\n`,
+    );
+    
+    process.stdout.write(
+      `Registry version is ${state}; ${state === PublicationStateManager.states.PRESENT ? "preserving identical published metadata" : "publication may proceed"}.\n`,
+    );
+  })();
 }
