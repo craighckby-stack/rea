@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:19.967Z
+# Engine: deterministic
+
 """Count verified Go tasks; tokenizer estimates are not model usage or billing."""
 import argparse
 import hashlib
