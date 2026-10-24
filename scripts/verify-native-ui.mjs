@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:34:52.196Z
+ * Engine: deterministic
+ */
 import { execFile, spawn } from "node:child_process";
 import assert from "node:assert/strict";
 import { mkdtemp, mkdir, writeFile, readFile, rm } from "node:fs/promises";
@@ -234,7 +240,7 @@ try {
       )
         throw new Error("MCP did not observe the selected fixture's AX action");
     });
-    scenarioStatus = "selected-AX-button-action-and-CLI-MCP-parity-observed";
+    scenarioStatus = "[REDACTED_HIGH_ENTROPY_KEY]";
   }
   const mismatch = await observeNativeUi(
     { ...target.value, sha256: "0".repeat(64) },
