@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:26:20.789Z
+# Engine: deterministic
+
 """Optionally audit external website links; network failures stay distinct from missing targets."""
 
 import argparse
