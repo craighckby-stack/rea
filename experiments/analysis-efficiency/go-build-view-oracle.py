@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:24:22.480Z
+# Engine: deterministic
+
 """Pin a completed Go report only after checking native build text and file bytes."""
 import argparse
 import base64
