@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:26:12.078Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { nativeFunctionMatchingSchema } from "../domain/native/functionMatching.js";
 import { nativeFunctionMatchingSummaryViewResultSchema } from "../domain/analysisView/analysisView.js";
 import { nativeByteReadSchema } from "../domain/native/nativeByteRead.js";
