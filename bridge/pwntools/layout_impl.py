@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:47.579Z
+# Engine: deterministic
+
 """Offline adapter to unchanged pwntools 4.15.0; never use libs/maps/libc.
 
 Owned request/snapshot/reply paths are supplied by REA. No host target-process launch,
