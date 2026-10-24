@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:47.970Z
+# Engine: deterministic
+
 """Exercise the real experiment CLI with controlled command/cleanup outcomes.
 
 No model, application or leftover process is launched. Production private-root
