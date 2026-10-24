@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:28:24.926Z
+# Engine: deterministic
+
 #!/usr/bin/env python3
 """Inspect or activate Hopper's authenticated demo dialog on a private X display."""
 
