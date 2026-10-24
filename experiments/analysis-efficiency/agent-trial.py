@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:56.340Z
+# Engine: deterministic
+
 """Evaluate one real Codex CLI task with an isolated REA MCP registration."""
 
 import argparse
