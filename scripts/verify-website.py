@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:36:53.618Z
+# Engine: deterministic
+
 """Check website references, search metadata and the sole production publisher."""
 
 from html.parser import HTMLParser
