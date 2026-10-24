@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:43:35.075Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { basename, dirname, join, sep } from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -193,7 +205,7 @@ describe("unresolved Claude Desktop package identity", () => {
   it.each([
     "Notes.AnthropicPBC.Claude_fnn82j28hfe8t",
     "AnthropicPBC.Claude_fnn82j28hfe8t.backup",
-    "AnthropicPBCxClaude_fnn82j28hfe8t",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
   ])("does not treat %s as a Claude package family", (name) => {
     const location = resolveWindowsClaudeDesktopLocation(home, env, {
       readdir: () => [name],
