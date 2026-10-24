@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:25:41.954Z
+# Engine: deterministic
+
 """Independent readers for the two pinned, single-device digital SR recordings."""
 
 import argparse
