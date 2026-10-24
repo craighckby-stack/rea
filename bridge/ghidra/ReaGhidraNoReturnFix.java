@@ -1,3 +1,9 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T14:20:17.819Z
+ * Engine: LLM
+ */
 import ghidra.app.cmd.function.CreateFunctionCmd;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.address.Address;
@@ -19,8 +25,16 @@ import java.util.TreeSet;
  * the call sites of the functions that were cleared and refit their owning functions in place.
  */
 public final class ReaGhidraNoReturnFix extends GhidraScript {
+  /**
+   * Set of known returning external function names that should not have no-return flag.
+   */
   private static final Set<String> RETURNING_IMPORTS = Set.of(
       "malloc", "__tls_get_addr", "memcpy", "memset", "strlen", "__errno_location");
+  
+  /**
+   * Default size for the pending deque when initialized.
+   */
+  private static final int DEFAULT_PENDING_SIZE = 16;
 
   @Override
   public void run() throws Exception {
@@ -29,7 +43,8 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
     FunctionManager fm = currentProgram.getFunctionManager();
     Listing li = currentProgram.getListing();
     Set<Address> cleared = new HashSet<>();
-    Deque<Address> pending = new ArrayDeque<>();
+    Deque<Address> pending = new ArrayDeque<>(DEFAULT_PENDING_SIZE);
+    
     for (Function f : fm.getExternalFunctions()) {
       monitor.checkCancelled();
       // Do not apply import-name assumptions to local functions or to arbitrary externals.
@@ -37,12 +52,14 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
       f.setNoReturn(false);
       enqueueReturning(f, cleared, pending);
     }
+    
     for (Function f : fm.getFunctions(true)) {
       monitor.checkCancelled();
       if (clearDecodedReturn(f, li)) {
         enqueueReturning(f, cleared, pending);
       }
     }
+    
     int redone = 0;
     TreeSet<Address> owners = new TreeSet<>();
     while (!pending.isEmpty()) {
@@ -54,6 +71,7 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
         monitor.checkCancelled();
         sites.add(reference.getFromAddress());
       }
+      
       for (Address s : sites) {
         monitor.checkCancelled();
         Instruction ins = li.getInstructionAt(s);
@@ -66,14 +84,18 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
           if (flow.equals(target)) callsTarget = true;
         }
         if (!callsTarget) continue;
+        
         // Do not redisassemble into an independently identified function.
         Address next = ins.getMaxAddress().add(1);
         if (fm.getFunctionAt(next) != null || !currentProgram.getMemory().contains(next)) continue;
+        
         Function owner = fm.getFunctionContaining(s);
         if (owner != null && !owner.isThunk()) owners.add(owner.getEntryPoint());
+        
         clearListing(ins.getMinAddress(), ins.getMaxAddress());
         disassemble(s);
         redone++;
+        
         // Refit the body in place so the name, signature and calling convention survive.
         if (owner != null && !owner.isThunk()) {
           CreateFunctionCmd.fixupFunctionBody(currentProgram, owner, monitor);
@@ -83,11 +105,18 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
         }
       }
     }
+    
     // No analyzeChanges here: on libpl2.so it adds about 70 s, which pushes startup past the 330 s deadline.
     println(
         "REA no-return fix: cleared=" + cleared.size() + " sites=" + redone + " refit=" + owners.size());
   }
 
+  /**
+   * Enqueue a function and its thunks for processing if they haven't been processed already.
+   * @param function the function to enqueue
+   * @param cleared set of already processed function entry points
+   * @param pending queue of functions to process
+   */
   private void enqueueReturning(Function function, Set<Address> cleared, Deque<Address> pending) {
     if (cleared.add(function.getEntryPoint())) pending.addLast(function.getEntryPoint());
     // A thunk inherits the flag of the function it forwards to, including through other thunks.
@@ -98,6 +127,11 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
     }
   }
 
+  /**
+   * Get the external ABI name of a function, handling format-specific prefixes.
+   * @param function the function to get the name for
+   * @return the ABI name without format-specific prefixes
+   */
   private String externalAbiName(Function function) {
     String name = function.getName();
     // Mach-O stores C-linkage symbols with one object-format underscore prefix.
@@ -106,18 +140,28 @@ public final class ReaGhidraNoReturnFix extends GhidraScript {
     return name;
   }
 
+  /**
+   * Clear the no-return flag on a function if it contains a decoded RETURN instruction.
+   * @param function the function to check
+   * @param listing the program listing
+   * @return true if the no-return flag was cleared, false otherwise
+   * @throws Exception if there's an error during processing
+   */
   private boolean clearDecodedReturn(Function function, Listing listing) throws Exception {
     if (!function.hasNoReturn() || function.isThunk()) return false;
+    
     for (Instruction instruction : listing.getInstructions(function.getBody(), true)) {
       monitor.checkCancelled();
       FlowType flow = instruction.getFlowType();
       if (flow.isJump() || flow.isCall()) continue;
+      
       for (PcodeOp operation : instruction.getPcode()) {
         if (operation.getOpcode() != PcodeOp.RETURN) continue;
         function.setNoReturn(false);
         return true;
       }
     }
+    
     return false;
   }
 }
