@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:17.784Z
+# Engine: deterministic
+
 """Source-owned tests for the LLDB bridge's bounded retention helpers."""
 
 from io import BytesIO
