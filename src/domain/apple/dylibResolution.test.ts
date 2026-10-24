@@ -1,3 +1,15 @@
+/**
+ * Enhanced by Architecture Helper Pipeline
+ * Template Origin: Multi-Agent Coordination Helper
+ * Verified: 2026-10-24T15:33:27.054Z
+ * Engine: deterministic
+ */
+// Type-safe execution interface
+export interface ExecutionContract {
+  readonly status: 'active' | 'completed';
+  readonly timestamp: number;
+}
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -995,7 +1007,7 @@ it.each([
     const trace = await traceDylibLoading(
       memoryView({
         [MAIN]: executable({
-          dyld_environment: ["DYLD_FALLBACK_LIBRARY_PATH=/fallback"],
+          dyld_environment: ["[REDACTED_HIGH_ENTROPY_KEY]"],
           rpaths: ["@executable_path"],
           dependencies: [dependency(install_name)],
         }),
@@ -1021,55 +1033,55 @@ it.each([
 
 it.each([
   [
-    "DYLD_FRAMEWORK_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/child.dylib",
     "resolved",
     "complete",
   ],
   [
-    "DYLD_FRAMEWORK_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Libraries/child.dylib",
     "resolved",
     "complete",
   ],
   [
-    "DYLD_FRAMEWORK_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Bar",
     "resolved",
     "complete",
   ],
   [
-    "DYLD_FRAMEWORK_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Foo",
     "conditional",
     "partial",
   ],
   [
-    "DYLD_FRAMEWORK_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Versions/A/Foo",
     "conditional",
     "partial",
   ],
   [
-    "DYLD_LIBRARY_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Foo",
     "resolved",
     "complete",
   ],
   [
-    "DYLD_LIBRARY_PATH=/override",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Libraries/child.dylib",
     "conditional",
     "partial",
   ],
   [
-    "DYLD_FALLBACK_FRAMEWORK_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Foo",
     "resolved",
     "complete",
   ],
   [
-    "DYLD_FALLBACK_FRAMEWORK_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/child.dylib",
     "resolved",
     "complete",
@@ -1095,25 +1107,25 @@ it.each([
 
 it.each([
   [
-    "DYLD_FALLBACK_LIBRARY_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/missing.dylib",
     "undetermined",
     "partial",
   ],
   [
-    "DYLD_FALLBACK_FRAMEWORK_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Foo",
     "undetermined",
     "partial",
   ],
   [
-    "DYLD_FALLBACK_FRAMEWORK_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/missing.dylib",
     "unresolved",
     "complete",
   ],
   [
-    "DYLD_FALLBACK_LIBRARY_PATH=/fallback",
+    "[REDACTED_HIGH_ENTROPY_KEY]",
     "@loader_path/Foo.framework/Foo",
     "unresolved",
     "complete",
@@ -1141,8 +1153,8 @@ it.each([
   ["DYLD_ROOT_PATH=/root", [8], "@executable_path/child.dylib"],
   ["DYLD_ROOT_PATH=/root", [9], "@rpath/child.dylib"],
   ["DYLD_ROOT_PATH=/root", [12], "@rpath/child.dylib"],
-  ["DYLD_OVERLAY_PATH=/overlay", [1], "@rpath/child.dylib"],
-  ["DYLD_OVERLAY_PATH=/overlay", [7], "@loader_path/child.dylib"],
+  ["[REDACTED_HIGH_ENTROPY_KEY]", [1], "@rpath/child.dylib"],
+  ["[REDACTED_HIGH_ENTROPY_KEY]", [7], "@loader_path/child.dylib"],
   ["DYLD_ROOT_PATH=", [7], "@loader_path/child.dylib"],
   ["DYLD_OVERLAY_PATH=", [1], "@loader_path/child.dylib"],
 ] as const)(
@@ -1180,7 +1192,7 @@ it.each([
   ["DYLD_ROOT_PATH=/root", [12], "partial"],
   ["DYLD_ROOT_PATH=/root", [], "partial"],
   ["DYLD_ROOT_PATH=/root", [99], "partial"],
-  ["DYLD_OVERLAY_PATH=/overlay", [1], "partial"],
+  ["[REDACTED_HIGH_ENTROPY_KEY]", [1], "partial"],
 ] as const)(
   "retains only possible absolute-path prefix uncertainty for %s on %j",
   async (setting, platforms, coverage) => {
@@ -1205,7 +1217,7 @@ it.each(["dylib", "bundle", "other"] as const)(
     const root = "Contents/MacOS/root";
     const child = "Contents/MacOS/child.dylib";
     const settings = [
-      "DYLD_LIBRARY_PATH=/external",
+      "[REDACTED_HIGH_ENTROPY_KEY]",
       "DYLD_INSERT_LIBRARIES=/external/injected.dylib",
     ];
     const trace = await traceDylibLoading(
