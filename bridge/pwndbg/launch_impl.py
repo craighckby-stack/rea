@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:23:35.765Z
+# Engine: deterministic
+
 """Lower inherited limits before replacing this owned process with GDB."""
 import json
 import os
