@@ -1,3 +1,8 @@
+# Enhanced by Architecture Helper Pipeline
+# Template Origin: Multi-Agent Coordination Helper
+# Verified: 2026-10-24T14:32:54.720Z
+# Engine: deterministic
+
 """Source-owned mutations built with the same unchanged upstream ELF/ABI structures."""
 import ctypes
 import io
